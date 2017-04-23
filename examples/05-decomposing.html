@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+</head>
+<body>
+	<input type="text" data-bind="value: firstName" />
+	<input type="text" data-bind="value: lastName" />
+	<input type="text" data-bind="value: fullName" />
+	<script>
+		var AppViewModel = function(){
+			this.firstName = ko.observable('');
+			this.lastName = ko.observable('');
+
+			this.fullName = ko.computed({
+				read: function(){
+					return this.firstName() + ' ' + this.lastName();
+				},
+				write: function(value){
+					var spacePosition = value.lastIndexOf(' ');
+					if(spacePosition > 0){
+						this.firstName(value.substring(0, spacePosition));
+						this.lastName(value.substring(spacePosition+1));
+					}
+				},
+				owner: this
+			});
+		};
+		ko.applyBindings(new AppViewModel());
+	</script>
+</body>
+</html>

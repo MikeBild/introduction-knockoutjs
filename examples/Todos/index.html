@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todos</title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+	<link rel="stylesheet" href="css/style.css" />
+	<script defer type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+	<section id="todoapp">
+
+	    <div class="title">
+	        <h1>Todos</h1>
+	    </div>
+
+	    <div class="content">
+	        <div id="create-todo">
+	            <input id="new-todo" data-bind="value: current, event: { keyup: add}" placeholder="What needs to be done?"
+	                type="text" />
+	            <span class="ui-tooltip-top" style="display: none;">Press Enter to save this task</span>
+	        </div>
+	        <div id="todos">
+	            <ul id="todo-list" data-bind="template: { name: 'todoitemtemplate', foreach: todos() }">
+	            </ul>
+	        </div>
+	        <div id="todo-stats" >
+	            <span class="todo-count" data-bind="visible: remaining().length > 0">
+	              <span class="number" data-bind="text: remaining().length"></span>
+	              <span class="word" data-bind="text: remaining().length == 1 ? 'item' : 'items'"></span> left.
+	            </span>
+	    
+	            <span class="todo-clear" data-bind="visible: done().length > 0">
+	              <a href="#" data-bind="click: removeCompleted">
+	                Clear <span class="number-done" data-bind="text: done().length"></span>
+	                completed <span class="word-done"data-bind="text: done().length == 1 ? 'item' : 'items'"></span>
+	              </a>
+	            </span>
+	        </div>
+	    </div>
+
+	    <script id="todoitemtemplate" type="text/html">
+	      <li>
+	        <div data-bind="attr: { class : done() ? 'todo done' : 'todo'}">
+	          <div class="display">
+	            <input class="check" type="checkbox" data-bind="checked: done" />
+	            <div class="todo-content" contenteditable="true" data-bind="text: content"></div>
+	            <span class="todo-destroy" data-bind="click: viewModel.remove"></span>
+	          </div>
+	        </div>
+	      </li>
+	    </script>
+	</section>
+</body>
+</html>

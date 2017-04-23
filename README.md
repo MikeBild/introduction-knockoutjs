@@ -6,11 +6,13 @@
 * [Computed](4-computed.md)
 * [Decomposing](5-decomposing.md)
 * [Arrays](6-arrays.md)
-* [Text](7-text.md)
-* [Control](8-control.md)
-* [Form](9-form.md)
-* [Mapping Plugin](10-mappings.md)
-* [Initial Data Plugin](11-initial.md)
+* [Build-In Element Bindings](7-element-bindings.md)
+* [Mapping Plugin](8-mapping.md)
+* [Pre-rendered HTML to KO-View-Model Binding](9-pre-rendered-html-binding.md)
+
+## Examples
+
+* [Todos](examples/Todos/index.html)
 
 ## Issue Reporting
 

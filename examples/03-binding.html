@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+</head>
+<body>
+	<input type="text" data-bind="value: personName" />
+	<span data-bind="text:personName"></span>
+	<span data-bind="text:personAge"></span>
+	<script>
+	
+		var myViewModel = {
+			personName: ko.observable('Bob'),
+			personAge: ko.observable(88)
+		};
+		ko.applyBindings(myViewModel);
+
+		//read
+		var name = myViewModel.personName();
+
+		//write
+		myViewModel.personName('Mary');
+
+		//fluent
+		myViewModel.personName('Max').personAge(50);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+</head>
+<body>
+	<span data-bind="text:personName"></span>
+	<script>
+	var myViewModel = {
+	    personName: 'Bob',
+	    personAge: 88
+	};
+	ko.applyBindings(myViewModel);
+	</script>
+</body>
+</html>

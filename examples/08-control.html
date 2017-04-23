@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+</head>
+<body>
+	<h1>Foreach</h1>
+	<ul data-bind="foreach: { data: categories, as: 'category' }">
+		<li>
+		    <ul data-bind="foreach: { data: items, as: 'item' }">
+		        <li>
+		            <span data-bind="text: category.name"></span>:
+		            <span data-bind="text: item"></span>
+		        </li>
+		    </ul>
+		</li>
+	</ul>
+	<hr>
+	<h1>If</h1>
+	<label>
+		<input type="checkbox" data-bind="checked: displayMessage" /> Display message
+	</label>
+	<div data-bind="if: displayMessage">
+		Here is a message.
+	</div>
+	<hr>
+	<h1>With</h1>
+	<section data-bind="with: context1">
+		<span data-bind="text: name"></span>
+	</section>
+	<section data-bind="with: context2">
+		<span data-bind="text: name"></span>
+	</section>
+	<script>
+
+		var AppViewModel = {
+			displayMessage: ko.observable(false),
+			categories: ko.observableArray([
+				{ name: 'Fruit', items: [ 'Apple', 'Orange', 'Banana' ] },
+				{ name: 'Vegetables', items: [ 'Celery', 'Corn', 'Spinach' ] }
+			]),
+			context1: {
+				name: 'Max'
+			},
+			context2: {
+				name: 'Moritz'
+			}
+		};
+		ko.applyBindings(AppViewModel);
+	</script>
+</body>
+</html>

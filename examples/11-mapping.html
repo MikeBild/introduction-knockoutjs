@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+	<script type="text/javascript" src="bower_components/knockout-mapping/knockout.mapping.js"></script>
+</head>
+<body>
+	<span data-bind="text: name"></span>
+	<ul data-bind="foreach: children">
+		<li data-bind="text: name"></li>
+	</ul>
+	<script>
+		var data = {
+			name: 'Scott',
+			children: [
+				{ id : 1, name : 'Alice' }
+			]
+		};
+
+		var data = ko.mapping.toJSON(data);
+		var AppViewModel = ko.mapping.fromJSON(data);
+		ko.applyBindings(AppViewModel);
+	</script>
+</body>
+</html>

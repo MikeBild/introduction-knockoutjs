@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+</head>
+<body>
+	<h1>Value</h1>
+	<input type="text" data-bind="value: data" />
+	<hr>	
+	<h1>Click</h1>
+	<button data-bind="click: show">Alert</button>
+	<hr>
+	<h1>Event</h1>
+	<button data-bind="event: { mouseover: enableDetails, mouseout: disableDetails }">Show</button>
+	<div data-bind="visible: detailsEnabled">Details</div>
+	<hr>
+	<h1>Checked</h1>
+	<input type="checkbox" data-bind="checked: isDone" /></p>
+	<div data-bind="visible: isDone">Done</div>
+	<hr>
+	<h1>Options / Select</h1>
+	<select data-bind="options: countries"></select>
+	<script>
+		var AppViewModel = {
+			detailsEnabled: ko.observable(false),
+	        enableDetails: function() {
+	            this.detailsEnabled(true);
+	        },
+	        disableDetails: function() {
+	            this.detailsEnabled(false);
+	        },
+			data: ko.observable(''),
+			show: function(){
+				alert(this.data() || 'Hello');
+			},
+			isDone: ko.observable(true),
+			countries: ko.observableArray(['France', 'Germany', 'Spain'])
+		};
+		ko.applyBindings(AppViewModel);
+	</script>
+</body>
+</html>

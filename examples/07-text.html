@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
+</head>
+<body>
+	<h1>Visible</h1>
+	<div data-bind="visible: shouldShowMessage">
+		You will see this message only when "shouldShowMessage" holds a true value.
+	</div>
+	<hr>
+	<h1>Text</h1>
+	Today's message is: <span data-bind="text: myMessage"></span>
+	<hr>
+	<h1>Html</h1>
+	<div data-bind="html: details"></div>
+	<hr>
+	<h1>Style</h1>
+	<div data-bind="style: { color: currentProfit() < 0 ? 'red' : 'black' }">
+		Show Information
+	</div>
+	<hr>
+	<h1>Attr</h1>
+	<a data-bind="attr: { href: url, title: details }">
+		Report
+	</a>
+	<script>
+		var AppViewModel = {
+			shouldShowMessage: ko.observable(false),
+			myMessage: ko.observable('Hello World'),
+			details: ko.observable('<em>For further details ... <a href="http://www.google.de">here</a>.</em>'),
+			currentProfit: ko.observable(-15),
+			url: ko.observable('http://www.google.de'),
+			details: ko.observable('Google')
+		};
+		ko.applyBindings(AppViewModel);
+	</script>
+</body>
+</html>
