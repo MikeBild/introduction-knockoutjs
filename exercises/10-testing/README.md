@@ -1,6 +1,6 @@
 # 10 · View Models und Bindings testen
 
-Diesmal ist der Code fertig: `search.ts` enthält ein Suchfeld mit Ergebnisliste. Du schreibst die Tests – mit Vitest, happy-dom und Testing Library, so wie Nutzer die Oberfläche bedienen.
+Diesmal ist der Code fertig: `search.ts` enthält die Produktsuche des Werkstatt-Shops mit Ergebnisliste. Die Suche „schraub“ findet Schraubenset und Akkuschrauber. Du schreibst die Tests – mit Vitest, happy-dom und Testing Library, so wie Nutzer die Oberfläche bedienen.
 
 ## Aufgabe
 
@@ -8,7 +8,7 @@ Diesmal ist der Code fertig: `search.ts` enthält ein Suchfeld mit Ergebnisliste
 2. Mach aus jedem `it.todo` einen echten Test. Bau die Oberfläche mit `mountSearch`, finde Elemente mit `getByLabelText` und `getByRole`, tippe mit `userEvent`.
 3. Prüfe die Liste über `within(screen.getByRole('list'))` statt über CSS-Selektoren.
 4. Schalte im letzten Test `ko.options.deferUpdates = true` ein. Zeig, dass das DOM erst nach `ko.tasks.runEarly()` stimmt.
-5. Ändere zur Probe `search.ts` (etwa `toLowerCase` entfernen) und prüf, ob deine Tests rot werden.
+5. Ändere zur Probe `search.ts` (etwa `toLowerCase` in `createProductSearch` entfernen) und prüf, ob deine Tests rot werden.
 
 ## Prüfen
 

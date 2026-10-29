@@ -6,9 +6,9 @@ import type * as Impl from './solution/element.ts'
 
 const target = import.meta.env.TARGET
 const impl: typeof Impl = await import(`./${target}/element.ts`)
-const { defineCounterElement } = impl
+const { defineQuantityElement } = impl
 
-beforeAll(() => defineCounterElement())
+beforeAll(() => defineQuantityElement())
 
 // Testing Library sucht nicht im Shadow DOM – wir geben den Container ausdrücklich an
 const inside = (host: Element) => {
@@ -16,58 +16,63 @@ const inside = (host: Element) => {
   if (!(container instanceof HTMLElement)) throw new Error('kein gebundener Inhalt im Shadow Root')
   return within(container)
 }
+const shown = (host: Element) => inside(host).getByRole('status').textContent
 
 describe('Knockout als Custom Element', () => {
   it('rendert mit dem Startwert aus dem Attribut', () => {
-    const counter = document.createElement('ko-counter')
-    counter.setAttribute('start', '5')
-    document.body.append(counter)
-    expect(inside(counter).getByRole('button').textContent).toBe('Zähler: 5')
+    const quantity = document.createElement('ko-quantity')
+    quantity.setAttribute('start', '5')
+    document.body.append(quantity)
+    expect(shown(quantity)).toBe('5')
   })
 
-  it('meldet Klicks als count-change-Event nach außen', async () => {
-    const counter = document.createElement('ko-counter')
+  it('meldet Klicks als quantity-change-Event nach außen und bleibt bei mindestens 1', async () => {
+    const quantity = document.createElement('ko-quantity')
     const onChange = vi.fn()
-    counter.addEventListener('count-change', (event) => onChange((event as CustomEvent).detail))
-    document.body.append(counter)
-    await userEvent.setup().click(inside(counter).getByRole('button'))
-    expect(onChange).toHaveBeenCalledWith(1)
+    quantity.addEventListener('quantity-change', (event) => onChange((event as CustomEvent).detail))
+    document.body.append(quantity)
+    const user = userEvent.setup()
+    await user.click(inside(quantity).getByRole('button', { name: 'Menge erhöhen' }))
+    await user.click(inside(quantity).getByRole('button', { name: 'Menge verringern' }))
+    await user.click(inside(quantity).getByRole('button', { name: 'Menge verringern' }))
+    expect(onChange.mock.calls).toEqual([[2], [1], [1]])
+    expect(shown(quantity)).toBe('1')
   })
 
   it('folgt Attributänderungen', () => {
-    const counter = document.createElement('ko-counter')
-    document.body.append(counter)
-    counter.setAttribute('start', '10')
-    expect(inside(counter).getByRole('button').textContent).toBe('Zähler: 10')
+    const quantity = document.createElement('ko-quantity')
+    document.body.append(quantity)
+    quantity.setAttribute('start', '10')
+    expect(shown(quantity)).toBe('10')
   })
 
   it('lässt sich aus einer Knockout-Seite mit attr- und event-Binding nutzen', async () => {
     document.body.innerHTML = `
-      <ko-counter data-bind="attr: { start: initial }, event: { 'count-change': onChange }"></ko-counter>
-      <p data-bind="text: 'Zuletzt: ' + last()"></p>`
-    const last = ko.observable(0)
+      <ko-quantity data-bind="attr: { start: initial }, event: { 'quantity-change': onChange }"></ko-quantity>
+      <p data-bind="text: 'Im Warenkorb: ' + chosen()"></p>`
+    const chosen = ko.observable(0)
     const page = {
       initial: ko.observable(3),
-      last,
-      onChange: (_data: unknown, event: CustomEvent<number>) => last(event.detail),
+      chosen,
+      onChange: (_data: unknown, event: CustomEvent<number>) => chosen(event.detail),
     }
     ko.applyBindings(page, document.body)
-    const counter = document.querySelector('ko-counter')
-    if (!counter) throw new Error('ko-counter fehlt')
-    expect(inside(counter).getByRole('button').textContent).toBe('Zähler: 3')
+    const quantity = document.querySelector('ko-quantity')
+    if (!quantity) throw new Error('ko-quantity fehlt')
+    expect(shown(quantity)).toBe('3')
     page.initial(7)
-    await userEvent.setup().click(inside(counter).getByRole('button'))
-    expect(document.querySelector('p')?.textContent).toBe('Zuletzt: 8')
+    await userEvent.setup().click(inside(quantity).getByRole('button', { name: 'Menge erhöhen' }))
+    expect(document.querySelector('p')?.textContent).toBe('Im Warenkorb: 8')
   })
 
   it('räumt Bindings auf, wenn das Element entfernt wird', () => {
-    const counter = document.createElement('ko-counter')
-    document.body.append(counter)
-    const container = counter.shadowRoot?.firstElementChild
+    const quantity = document.createElement('ko-quantity')
+    document.body.append(quantity)
+    const container = quantity.shadowRoot?.firstElementChild
     if (!container) throw new Error('kein Inhalt')
     expect(ko.dataFor(container)).toBeDefined()
-    counter.remove()
+    quantity.remove()
     expect(ko.dataFor(container)).toBeUndefined()
-    expect(counter.shadowRoot?.childElementCount).toBe(0)
+    expect(quantity.shadowRoot?.childElementCount).toBe(0)
   })
 })

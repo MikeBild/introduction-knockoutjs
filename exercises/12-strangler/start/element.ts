@@ -38,21 +38,29 @@ export const defineKnockoutElement = (tagName: string, options: KnockoutElementO
   customElements.define(tagName, KnockoutElement)
 }
 
-export const defineCounterElement = () =>
-  defineKnockoutElement('ko-counter', {
+// Beispiel aus dem Werkstatt-Shop: Mengenwahl mit Attribut start und Event quantity-change
+export const defineQuantityElement = () =>
+  defineKnockoutElement('ko-quantity', {
     observedAttributes: ['start'],
-    template: `<button type="button" data-bind="click: increment, text: 'Zähler: ' + count()"></button>`,
+    template: `
+      <button type="button" aria-label="Menge verringern" data-bind="click: decrement">−</button>
+      <output data-bind="text: quantity"></output>
+      <button type="button" aria-label="Menge erhöhen" data-bind="click: increment">+</button>`,
     createViewModel: (host, attributes) => {
       const start = attributes['start'] ?? ko.observable<string | null>(null)
-      const count = ko.observable(Number(start() ?? 0))
-      // TODO: Änderungen an start in count übernehmen und die Subscription in dispose beenden
+      const toQuantity = (value: string | null) => Math.max(1, Math.trunc(Number(value ?? 1)) || 1)
+      const quantity = ko.observable(toQuantity(start()))
+      // TODO: Änderungen an start in quantity übernehmen und die Subscription in dispose beenden
+      // TODO: change setzt die Menge (nie unter 1) und löst CustomEvent 'quantity-change'
+      //       mit detail: quantity(), bubbles und composed aus
+      const change = (next: number) => {
+        quantity(next)
+        void host
+      }
       return {
-        count,
-        increment: () => {
-          count(count() + 1)
-          // TODO: CustomEvent 'count-change' mit detail: count(), bubbles und composed auslösen
-          void host
-        },
+        quantity,
+        increment: () => change(quantity() + 1),
+        decrement: () => change(quantity() - 1),
       }
     },
   })

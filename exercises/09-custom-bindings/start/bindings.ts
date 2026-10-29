@@ -1,9 +1,10 @@
 import ko from 'knockout'
+import { formatCents } from '../../shop.ts'
 
-// TODO: update-Funktion: Wert mit ko.unwrap lesen und als Euro formatieren
-//       (Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }))
+// TODO: update-Funktion: Wert (ganze Cent) mit ko.unwrap lesen und mit formatCents anzeigen
 const currency: ko.BindingHandler<ko.MaybeSubscribable<number>> = {
   update: (element: HTMLElement, valueAccessor) => {
+    void formatCents
     element.textContent = String(ko.unwrap(valueAccessor()))
   },
 }

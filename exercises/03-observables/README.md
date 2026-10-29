@@ -1,13 +1,13 @@
 # 03 · Wie merkt Knockout, dass sich etwas ändert?
 
-Ein Observable ist eine Funktion: ohne Argument liest du den Wert, mit Argument schreibst du ihn. Wer liest, während ein Computed oder Binding rechnet, wird automatisch als Abhängigkeit registriert.
+Ein Observable ist eine Funktion: ohne Argument liest du den Wert, mit Argument schreibst du ihn. Wer liest, während ein Computed oder Binding rechnet, wird automatisch als Abhängigkeit registriert. Beispiel ist die Menge einer Warenkorb-Position im Werkstatt-Shop.
 
 ## Aufgabe
 
-1. Öffne `start/counter.ts`.
-2. Implementiere `increment` und `reset` in `createCounter`.
+1. Öffne `start/quantity.ts`.
+2. Implementiere `increment` und `decrement` in `createQuantity`. Die Menge fällt nie unter 1.
 3. Schreib `recordChanges`: sammle per `subscribe` jeden neuen Wert, `dispose` beendet die Subscription.
-4. Ändere `createAuditedTotal` so, dass der Steuersatz mit `peek()` gelesen wird. Eine Änderung am Steuersatz löst dann keine Neuberechnung aus.
+4. Ändere `createAuditedTotal` so, dass der Steuersatz mit `peek()` gelesen wird. Eine Änderung am Steuersatz löst dann keine Neuberechnung aus. Die Summe bleibt in ganzen Cent.
 5. Überleg: Wann ist `peek` richtig, wann versteckt es einen Bug?
 
 ## Prüfen

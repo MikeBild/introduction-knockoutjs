@@ -1,13 +1,14 @@
 import ko from 'knockout'
 
-export type Comment = { author: string; body: string }
+// Produktbewertung im Werkstatt-Shop – body ist Nutzereingabe
+export type Review = { author: string; body: string }
 
 // Nutzereingaben nie mit html binden: text escaped, linkify baut DOM-Knoten selbst
-export const commentsTemplate = `
-  <ul data-bind="foreach: comments">
+export const reviewsTemplate = `
+  <ul data-bind="foreach: { data: reviews, as: 'review' }">
     <li>
-      <strong data-bind="text: author"></strong>
-      <p data-bind="linkify: body"></p>
+      <strong data-bind="text: review.author"></strong>
+      <p data-bind="linkify: review.body"></p>
     </li>
   </ul>
 `

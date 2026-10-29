@@ -1,6 +1,6 @@
 # 11 · deferUpdates und rateLimit gezielt einsetzen
 
-Knockout aktualisiert standardmäßig synchron: Jede Änderung läuft sofort durch alle Computeds und Bindings. `deferUpdates` bündelt Änderungen in einer Microtask, `rateLimit` drosselt einzelne Observables – etwa eine Suche während der Eingabe.
+Knockout aktualisiert standardmäßig synchron: Jede Änderung läuft sofort durch alle Computeds und Bindings. `deferUpdates` bündelt Änderungen in einer Microtask, `rateLimit` drosselt einzelne Observables – etwa die Produktsuche des Werkstatt-Shops während der Eingabe.
 
 ## Aufgabe
 

@@ -1,11 +1,10 @@
 import ko from 'knockout'
+import { formatCents } from '../../shop.ts'
 
-const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
-
-// update läuft beim Binden und nach jeder Änderung der gelesenen Observables
+// update läuft beim Binden und nach jeder Änderung der gelesenen Observables; der Wert sind ganze Cent
 const currency: ko.BindingHandler<ko.MaybeSubscribable<number>> = {
   update: (element: HTMLElement, valueAccessor) => {
-    element.textContent = euro.format(ko.unwrap(valueAccessor()))
+    element.textContent = formatCents(ko.unwrap(valueAccessor()))
   },
 }
 

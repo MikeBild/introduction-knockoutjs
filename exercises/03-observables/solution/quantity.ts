@@ -1,12 +1,12 @@
 import ko from 'knockout'
 
 // Ein Observable ist eine Funktion: ohne Argument lesen, mit Argument schreiben
-export const createCounter = (start = 0) => {
-  const count = ko.observable(start)
+export const createQuantity = (start = 1) => {
+  const quantity = ko.observable(Math.max(1, start))
   return {
-    count,
-    increment: () => count(count() + 1),
-    reset: () => count(start),
+    quantity,
+    increment: () => quantity(quantity() + 1),
+    decrement: () => quantity(Math.max(1, quantity() - 1)),
   }
 }
 
@@ -21,14 +21,14 @@ export const recordChanges = <T>(source: ko.Subscribable<T>): { values: T[]; dis
 
 // peek liest einen Wert, ohne eine Abhängigkeit anzulegen
 export const createAuditedTotal = (
-  price: ko.Observable<number>,
+  priceCents: ko.Observable<number>,
   quantity: ko.Observable<number>,
   taxRate: ko.Observable<number>,
 ) => {
   let evaluations = 0
-  const total = ko.pureComputed(() => {
+  const totalCents = ko.pureComputed(() => {
     evaluations += 1
-    return price() * quantity() * (1 + taxRate.peek())
+    return Math.round(priceCents() * quantity() * (1 + taxRate.peek()))
   })
-  return { total, evaluations: () => evaluations }
+  return { totalCents, evaluations: () => evaluations }
 }

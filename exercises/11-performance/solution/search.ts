@@ -1,7 +1,8 @@
 import ko from 'knockout'
+import type { Product } from '../../shop.ts'
 
 // rateLimit mit notifyWhenChangesStop: Abhängige erfahren erst nach 300 ms Ruhe vom neuen Wert
-export const createLiveSearch = (load: (query: string) => string[]) => {
+export const createLiveSearch = (load: (query: string) => Product[]) => {
   let loadCount = 0
   const query = ko
     .observable('')
