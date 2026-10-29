@@ -1,4 +1,4 @@
-# 09 · Knockout mit TypeScript, ESM und Vite
+# 08 · Knockout mit TypeScript, ESM und Vite
 
 Knockout 3.5 bringt eigene Type-Definitionen mit. Mit `import ko from 'knockout'`, TypeScript strict und Vite verschwinden Script-Tags, Bower und das globale `ko`.
 
@@ -13,7 +13,7 @@ Knockout 3.5 bringt eigene Type-Definitionen mit. Mit `import ko from 'knockout'
 ## Prüfen
 
 ```bash
-npm run test:start -- exercises/09-typescript-vite
+npm run test:start -- exercises/08-typescript-vite
 npm run typecheck
 ```
 

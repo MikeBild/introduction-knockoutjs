@@ -17,9 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@preact/signals-core": "^1.14.5",
-    "knockout": "^3.5.3",
-    "rxjs": "^7.8.2"
+    "knockout": "^3.5.3"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.2",
