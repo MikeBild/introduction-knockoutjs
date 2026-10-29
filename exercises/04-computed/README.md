@@ -16,4 +16,4 @@ Ein `pureComputed` rechnet nur, solange jemand zuhört, und schläft sonst. Für
 npm run test:start -- exercises/04-computed
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

@@ -16,4 +16,4 @@ Wo du DOM-APIs, Formatierung oder Fremd-Widgets brauchst, gehört der Code in ei
 npm run test:start -- exercises/09-custom-bindings
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

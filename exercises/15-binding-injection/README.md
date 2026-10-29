@@ -18,4 +18,4 @@ Auch ohne `html`-Binding kann Knockout Code ausführen, den ein Angreifer liefer
 npm run test:start -- exercises/15-binding-injection
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

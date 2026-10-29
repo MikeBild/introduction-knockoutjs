@@ -16,4 +16,4 @@ Während einer Migration brauchen Knockout-Seiten und neue Web Components densel
 npm run test:start -- exercises/13-state-bridge
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

@@ -23,7 +23,7 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     expect(screen.getByText(/^12,90\s€$/)).toBeTruthy()
     const werkbank = screen.getByRole<HTMLButtonElement>('button', { name: 'In den Warenkorb: Werkbank' })
     expect(werkbank.disabled).toBe(true)
-    expect(screen.getByText('Dein Warenkorb ist leer')).toBeTruthy()
+    expect(screen.getByText('Dein Warenkorb ist leer. Leg oben ein Produkt hinein.')).toBeTruthy()
   })
 
   it('legt Produkte in den Warenkorb und rechnet die Summe', async () => {
@@ -33,7 +33,7 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     await user.click(screen.getByRole('button', { name: 'In den Warenkorb: Akkuschrauber' }))
     expect(vm.cart.totalCents()).toBe(2 * 1290 + 8990)
     expect(sum()).toBe('Summe: 115,70 €')
-    expect(screen.getByText('Dein Warenkorb ist leer').style.display).toBe('none')
+    expect(screen.getByText('Dein Warenkorb ist leer. Leg oben ein Produkt hinein.').style.display).toBe('none')
   })
 
   it('übernimmt eine getippte Menge als Zahl und zählt danach weiter', async () => {

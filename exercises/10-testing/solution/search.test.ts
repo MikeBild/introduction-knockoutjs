@@ -28,12 +28,12 @@ describe('Produktsuche', () => {
     expect(names()).toEqual(['Schraubenset', 'Akkuschrauber'])
   })
 
-  it('zeigt „Keine Treffer“, wenn nichts passt', async () => {
+  it('zeigt einen Hinweis, wenn kein Produkt passt', async () => {
     const { user } = setup()
-    expect(screen.queryByText('Keine Treffer')).toBeNull()
+    expect(screen.queryByText(/^Kein Produkt passt/)).toBeNull()
     await user.type(screen.getByLabelText('Suche'), 'Hammer')
     expect(names()).toEqual([])
-    expect(screen.getByText('Keine Treffer')).toBeTruthy()
+    expect(screen.getByText('Kein Produkt passt zu deiner Suche. Versuch einen anderen Begriff.')).toBeTruthy()
   })
 
   it('aktualisiert mit deferUpdates erst nach ko.tasks.runEarly()', () => {

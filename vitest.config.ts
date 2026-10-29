@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config'
 
-// TARGET=start prüft deine Lösung im Ordner start/, ohne Angabe laufen die Musterlösungen.
+// TARGET=start prüft deinen Startpunkt im Ordner start/, ohne Angabe laufen die Lösungen in solution/.
 const target = process.env.TARGET === 'start' ? 'start' : 'solution'
 
 export default defineConfig({
