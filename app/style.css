@@ -1,0 +1,19 @@
+/* Eigene Datei statt <style> im HTML: so reicht default-src 'self' in der CSP */
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-block: 0.25rem;
+}
+
+input[type='number'] {
+  width: 4rem;
+}
