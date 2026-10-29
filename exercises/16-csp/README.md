@@ -17,7 +17,7 @@ Trusted Types gehen einen Schritt weiter: Mit `require-trusted-types-for 'script
    ```
 
    `vite.config.ts` setzt den Header aus `buildCsp({ allowEval: true })`. Öffne die App und prüf in den DevTools unter Network den Header `Content-Security-Policy`.
-5. Probe: Setz in `vite.config.ts` `allowEval: false`, bau neu und lade die Vorschau. Die Konsole meldet einen CSP-Verstoß, die Todo-Liste bleibt leer. Danach wieder zurückstellen.
+5. Probe: Setz in `vite.config.ts` `allowEval: false`, bau neu und lade die Vorschau. Die Konsole meldet einen CSP-Verstoß, die Produktliste bleibt leer. Danach wieder zurückstellen.
 
 ## Prüfen
 

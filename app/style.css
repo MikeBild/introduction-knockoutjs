@@ -8,9 +8,12 @@ body {
 
 li {
   list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-block: 0.25rem;
 }
 
-li:has(input:checked) span {
-  text-decoration: line-through;
-  opacity: 0.6;
+input[type='number'] {
+  width: 4rem;
 }

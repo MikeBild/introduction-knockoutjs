@@ -40,11 +40,11 @@ describe('createHtmlPolicy', () => {
 
   it('zeigt im html-Binding nur bereinigtes HTML', () => {
     const policy = createHtmlPolicy(sanitizeBasic)
-    document.body.innerHTML = '<div data-bind="html: body"></div>'
-    const body = ko.observable(policy.createHTML('<b>fett</b><img src=x onerror="alert(1)">'))
-    ko.applyBindings({ body }, document.body)
+    document.body.innerHTML = '<div data-bind="html: review"></div>'
+    const review = ko.observable(policy.createHTML('<b>Sehr stabil</b> – die Werkbank<img src=x onerror="alert(1)">'))
+    ko.applyBindings({ review }, document.body)
     const div = document.querySelector('div')
-    expect(div?.querySelector('b')?.textContent).toBe('fett')
+    expect(div?.querySelector('b')?.textContent).toBe('Sehr stabil')
     expect(div?.querySelector('img')).toBeNull()
   })
 
@@ -53,6 +53,6 @@ describe('createHtmlPolicy', () => {
     ;(globalThis as { trustedTypes?: unknown }).trustedTypes = { createPolicy }
     const policy = createHtmlPolicy(sanitizeBasic)
     expect(createPolicy).toHaveBeenCalledWith('knockout-html', expect.anything())
-    expect(policy.createHTML('<i>ok</i><script>x</script>')).toBe('<i>ok</i>')
+    expect(policy.createHTML('<i>Gern wieder</i><script>x</script>')).toBe('<i>Gern wieder</i>')
   })
 })

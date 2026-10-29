@@ -9,7 +9,7 @@ export type KnockoutElementOptions = {
   observedAttributes?: string[]
 }
 
-// Hüllt Knockout in ein Custom Element: jede Seite – React, Svelte, statisches HTML – kann es nutzen.
+// Hüllt Knockout in ein Custom Element: jede Seite, die HTML ausliefert, kann es nutzen.
 // Shadow DOM verhindert, dass ein äußeres ko.applyBindings in den Inhalt hineinbindet.
 export const defineKnockoutElement = (tagName: string, options: KnockoutElementOptions) => {
   if (customElements.get(tagName)) return
@@ -50,23 +50,30 @@ export const defineKnockoutElement = (tagName: string, options: KnockoutElementO
   customElements.define(tagName, KnockoutElement)
 }
 
-// Beispiel: ein Zähler mit Attribut start und Event count-change
-export const defineCounterElement = () =>
-  defineKnockoutElement('ko-counter', {
+
+// Beispiel aus dem Werkstatt-Shop: Mengenwahl mit Attribut start und Event quantity-change
+export const defineQuantityElement = () =>
+  defineKnockoutElement('ko-quantity', {
     observedAttributes: ['start'],
-    template: `<button type="button" data-bind="click: increment, text: 'Zähler: ' + count()"></button>`,
+    template: `
+      <button type="button" aria-label="Menge verringern" data-bind="click: decrement">−</button>
+      <output data-bind="text: quantity"></output>
+      <button type="button" aria-label="Menge erhöhen" data-bind="click: increment">+</button>`,
     createViewModel: (host, attributes) => {
       const start = attributes['start'] ?? ko.observable<string | null>(null)
-      const count = ko.observable(Number(start() ?? 0))
-      const subscription = start.subscribe((value) => count(Number(value ?? 0)))
+      const toQuantity = (value: string | null) => Math.max(1, Math.trunc(Number(value ?? 1)) || 1)
+      const quantity = ko.observable(toQuantity(start()))
+      const subscription = start.subscribe((value) => quantity(toQuantity(value)))
+      const change = (next: number) => {
+        quantity(Math.max(1, next))
+        host.dispatchEvent(
+          new CustomEvent('quantity-change', { detail: quantity(), bubbles: true, composed: true }),
+        )
+      }
       return {
-        count,
-        increment: () => {
-          count(count() + 1)
-          host.dispatchEvent(
-            new CustomEvent('count-change', { detail: count(), bubbles: true, composed: true }),
-          )
-        },
+        quantity,
+        increment: () => change(quantity() + 1),
+        decrement: () => change(quantity() - 1),
         dispose: () => subscription.dispose(),
       }
     },

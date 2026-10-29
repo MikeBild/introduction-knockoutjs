@@ -1,14 +1,15 @@
 import ko from 'knockout'
 
-export type Comment = { author: string; body: string }
+// Produktbewertung im Werkstatt-Shop – body ist Nutzereingabe
+export type Review = { author: string; body: string }
 
-// TODO: Die Lücke schließen – html: body rendert Nutzereingaben als Markup (Cross-Site Scripting).
+// TODO: Die Lücke schließen – html: review.body rendert Nutzereingaben als Markup (Cross-Site Scripting).
 //       Nimm stattdessen das linkify-Binding.
-export const commentsTemplate = `
-  <ul data-bind="foreach: comments">
+export const reviewsTemplate = `
+  <ul data-bind="foreach: { data: reviews, as: 'review' }">
     <li>
-      <strong data-bind="text: author"></strong>
-      <p data-bind="html: body"></p>
+      <strong data-bind="text: review.author"></strong>
+      <p data-bind="html: review.body"></p>
     </li>
   </ul>
 `

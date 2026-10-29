@@ -1,6 +1,6 @@
 # 15 · Eingeschleuste Bindings entschärfen
 
-Auch ohne `html`-Binding kann Knockout Code ausführen, den ein Angreifer liefert: Rendert der Server Nutzer-HTML in einen Bereich, den Knockout danach bindet, wertet `ko.applyBindings` jedes `data-bind` darin aus. Ein harmlos aussehender Kommentar mit `data-bind="text: (function(){ … })()"` wird so zu Code. Das heißt Binding Injection.
+Auch ohne `html`-Binding kann Knockout Code ausführen, den ein Angreifer liefert: Rendert der Server Nutzer-HTML in einen Bereich, den Knockout danach bindet, wertet `ko.applyBindings` jedes `data-bind` darin aus. Eine harmlos aussehende Produktbewertung mit `data-bind="text: (function(){ … })()"` wird so zu Code. Das heißt Binding Injection.
 
 ## Aufgabe
 
