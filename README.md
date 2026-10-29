@@ -1,29 +1,52 @@
-# Introduction to KnockoutKS
+# Knockout modernisiert
 
-* [Key Concepts](1-key-concepts.md)
-* [View Model Binding](2-vm-binding.md)
-* [KO Observable](3-observable.md)
-* [Computed](4-computed.md)
-* [Decomposing](5-decomposing.md)
-* [Arrays](6-arrays.md)
-* [Build-In Element Bindings](7-element-bindings.md)
-* [Mapping Plugin](8-mapping.md)
-* [Pre-rendered HTML to KO-View-Model Binding](9-pre-rendered-html-binding.md)
+Übungen zum Workshop „Knockout modernisiert“ auf [workshops.mikebild.dev](https://workshops.mikebild.dev): MVVM und Observables sauber verstehen, Knockout mit TypeScript, ESM und Vite betreiben, testen, schnell und sicher halten – und Schritt für Schritt migrieren.
 
-## Examples
+## Stand Oktober 2026
 
-* [Todos](examples/Todos/index.html)
+- **Knockout 3.5.3** vom 25. März 2026 ist die aktuelle Version. Nach 3.5.1 (2019) kamen 2026 zwei Wartungs-Releases: 3.5.2 mit Bugfixes, Trusted-Types-Support und genaueren Type-Definitionen, 3.5.3 mit Fixes für Strict Mode und Computed-Types.
+- Neue Features kommen in Knockout 3.x kaum noch. Die Weiterentwicklung läuft in **TKO** (Knockout 4, `@tko/build.knockout` als kompatibler Build, `@tko/build.reference` als moderner Build), stabil seit April 2026.
+- Viele Unternehmensanwendungen laufen weiter mit Knockout 3.5. Genau dafür ist dieses Repo gedacht.
 
-## Issue Reporting
+## Voraussetzungen
 
-If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public [GitHub issue tracker](https://github.com/MikeBild/introduction-knockoutjs/issues).
+- Node.js 26 (siehe `.nvmrc`)
+- Git und ein Editor mit TypeScript-Support, z. B. VS Code
 
-## License
+```bash
+npm install
+npm test             # alle Tests gegen die Musterlösungen in solution/
+npm run test:start   # alle Tests gegen deine Lösungen in start/
+npm run test:start -- exercises/05-observable-array   # nur eine Übung
+npm run typecheck    # TypeScript strict
+npm run dev          # Todo-App mit Vite starten (index.html, app/)
+```
 
-This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more info.
+Jede Übung hat einen Ordner `start/` (dein Arbeitsplatz) und `solution/` (Musterlösung). Die Testdatei liegt daneben und lädt je nach `TARGET` die eine oder die andere Variante.
 
-## Thanks
+## Übungen
 
-You like this __KnockoutJS introduction__ and you want to see what coming next? Follow me on Twitter [`@mikebild`](https://twitter.com/mikebild).
+| Nr. | Übung | Thema |
+| --- | --- | --- |
+| 01 | [legacy-audit](exercises/01-legacy-audit) | Altlasten im Knockout-Code finden |
+| 02 | [mvvm](exercises/02-mvvm) | View Model und View trennen |
+| 03 | [observables](exercises/03-observables) | observable, subscribe, peek |
+| 04 | [computed](exercises/04-computed) | pureComputed, schreibbar mit read und write |
+| 05 | [observable-array](exercises/05-observable-array) | observableArray und arrayChange |
+| 06 | [bindings](exercises/06-bindings) | Eingebaute Bindings für eine Todo-Liste |
+| 07 | [components](exercises/07-components) | Komponenten mit params und dispose |
+| 08 | [custom-bindings](exercises/08-custom-bindings) | Custom Bindings mit init, update und Disposal |
+| 09 | [typescript-vite](exercises/09-typescript-vite) | Typen, ESM und Vite |
+| 10 | [testing](exercises/10-testing) | Vitest, happy-dom und Testing Library |
+| 11 | [performance](exercises/11-performance) | deferUpdates und rateLimit |
+| 12 | [security](exercises/12-security) | Kein html-Binding mit Nutzereingaben |
+| 13 | [strangler](exercises/13-strangler) | Knockout als Custom Element, Migration Schritt für Schritt |
+| 14 | [signals-bridge](exercises/14-signals-bridge) | Brücken zu RxJS und Signals |
 
-Enjoy!
+## Material von 2015
+
+Der Ordner [`legacy/`](legacy) enthält das ursprüngliche Einführungsmaterial (Bower, globales `ko`, `ko.dependentObservable`, Mapping-Plugin). Es bleibt als Anschauungsobjekt für Übung 01 und für den Vergleich alt gegen neu.
+
+## Lizenz
+
+MIT, siehe [LICENSE](LICENSE).
