@@ -1,6 +1,6 @@
 # 07 · Komponenten statt verschachtelter Templates
 
-Eine Knockout-Komponente bündelt Template und View Model unter einem Tag-Namen. Daten kommen über `params`, Aufräumarbeit gehört in `dispose`. Beispiel ist eine Warenkorb-Zeile im Werkstatt-Shop (`cart.ts` ist der Warenkorb aus Übung 05).
+Eine Knockout-Komponente bündelt Template und ViewModel unter einem Tag-Namen. Daten kommen über `params`, Aufräumarbeit gehört in `dispose`. Beispiel ist eine Warenkorb-Zeile im Werkstatt-Shop (`cart.ts` ist der Warenkorb aus Übung 05).
 
 ## Aufgabe
 

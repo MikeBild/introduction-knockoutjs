@@ -27,11 +27,11 @@ export const defineKnockoutElement = (tagName: string, options: KnockoutElementO
     }
 
     // TODO: Shadow Root anlegen (mode: 'open'), darin ein <div> mit options.template,
-    //       View Model mit options.createViewModel(this, this.attrs) erzeugen und auf das <div> binden.
+    //       ViewModel mit options.createViewModel(this, this.attrs) erzeugen und auf das <div> binden.
     //       Warum Shadow DOM? Ein äußeres ko.applyBindings bindet sonst in deinen Inhalt hinein.
     connectedCallback() {}
 
-    // TODO: ko.cleanNode auf das <div>, dispose des View Models aufrufen, Inhalt entfernen
+    // TODO: ko.cleanNode auf das <div>, dispose des ViewModels aufrufen, Inhalt entfernen
     disconnectedCallback() {}
   }
 

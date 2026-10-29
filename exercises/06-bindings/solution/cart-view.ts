@@ -10,9 +10,10 @@ export const shopTemplate = `
     <li>
       <span data-bind="text: product.name"></span>
       <span data-bind="text: $parent.formatCents(product.priceCents)"></span>
-      <button type="button" data-bind="click: $parent.add, enable: product.stock > 0, attr: { 'aria-label': 'In den Warenkorb: ' + product.name }">
+      <button type="button" data-bind="click: $parent.add, enable: product.stock > 0, attr: { 'aria-label': 'In den Warenkorb: ' + product.name, 'aria-describedby': product.stock > 0 ? null : 'sold-out-' + product.id }">
         In den Warenkorb
       </button>
+      <small data-bind="visible: product.stock === 0, attr: { id: 'sold-out-' + product.id }">Ausverkauft</small>
     </li>
   </ul>
 
@@ -31,7 +32,8 @@ export const shopTemplate = `
 
   <form data-bind="submit: placeOrder">
     <label>E-Mail <input type="email" data-bind="textInput: email" /></label>
-    <button type="submit" data-bind="enable: canOrder">Bestellen</button>
+    <button type="submit" aria-describedby="order-hint" data-bind="enable: canOrder">Bestellen</button>
+    <small id="order-hint" data-bind="visible: !canOrder(), text: orderHint"></small>
   </form>
   <p data-bind="visible: placed">Danke für deine Bestellung.</p>
 `

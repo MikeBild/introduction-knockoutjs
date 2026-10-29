@@ -1,6 +1,6 @@
 # 09 · Custom Bindings kapseln das DOM
 
-Wo du DOM-APIs, Formatierung oder Fremd-Widgets brauchst, gehört der Code in ein Custom Binding – nicht ins View Model. `init` läuft einmal, `update` nach jeder Änderung, und alles, was du anmeldest, meldest du beim Entfernen wieder ab.
+Wo du DOM-APIs, Formatierung oder Fremd-Widgets brauchst, gehört der Code in ein Custom Binding – nicht ins ViewModel. `init` läuft einmal, `update` nach jeder Änderung, und alles, was du anmeldest, meldest du beim Entfernen wieder ab.
 
 ## Aufgabe
 

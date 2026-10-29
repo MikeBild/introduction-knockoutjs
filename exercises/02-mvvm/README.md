@@ -1,6 +1,6 @@
-# 02 · View Model und View sauber trennen
+# 02 · ViewModel und View sauber trennen
 
-Model View ViewModel, kurz MVVM, trennt Zustand und Darstellung. Das View Model kennt kein DOM, die View enthält keine Logik, die Bindings verbinden beide. Beispiel ist die Kundenangabe im Werkstatt-Shop.
+Model View ViewModel, kurz MVVM, trennt Zustand und Darstellung. Das ViewModel kennt kein DOM, die View enthält keine Logik, die Bindings verbinden beide. Beispiel ist die Kundenangabe im Werkstatt-Shop.
 
 ## Aufgabe
 

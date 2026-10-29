@@ -1,4 +1,4 @@
-# 10 · View Models und Bindings testen
+# 10 · ViewModels und Bindings testen
 
 Diesmal ist der Code fertig: `search.ts` enthält die Produktsuche des Werkstatt-Shops mit Ergebnisliste. Die Suche „schraub“ findet Schraubenset und Akkuschrauber. Du schreibst die Tests – mit Vitest, happy-dom und Testing Library, so wie Nutzer die Oberfläche bedienen.
 

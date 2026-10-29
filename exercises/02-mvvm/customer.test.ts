@@ -17,7 +17,7 @@ const setup = () => {
 }
 
 describe('Kunde im MVVM', () => {
-  it('berechnet die Überschrift im View Model ohne DOM', () => {
+  it('berechnet die Überschrift im ViewModel ohne DOM', () => {
     const vm = createCustomerViewModel({ name: 'Grace', email: 'grace@example.org' })
     expect(vm.greeting()).toBe('Bestellung für Grace')
     vm.name('Grace Hopper')
@@ -29,7 +29,7 @@ describe('Kunde im MVVM', () => {
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe('Bestellung für Ada')
   })
 
-  it('aktualisiert View Model und Überschrift bei jeder Eingabe', async () => {
+  it('aktualisiert ViewModel und Überschrift bei jeder Eingabe', async () => {
     const { vm } = setup()
     const user = userEvent.setup()
     const name = screen.getByLabelText('Name')
