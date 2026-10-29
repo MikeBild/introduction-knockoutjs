@@ -20,9 +20,12 @@ npm run test:start   # alle Tests gegen deine Lösungen in start/
 npm run test:start -- exercises/05-observable-array   # nur eine Übung
 npm run typecheck    # TypeScript strict
 npm run dev          # Todo-App mit Vite starten (index.html, app/)
+npm run build && npx vite preview   # gebaute App mit Content Security Policy (Übung 16)
 ```
 
 Jede Übung hat einen Ordner `start/` (dein Arbeitsplatz) und `solution/` (Musterlösung). Die Testdatei liegt daneben und lädt je nach `TARGET` die eine oder die andere Variante.
+
+Bewusst wenig Abhängigkeiten: Knockout 3.5, TypeScript, Vite und Vitest, für Tests dazu happy-dom und Testing Library. Keine weiteren Frameworks oder Plugins.
 
 ## Übungen
 
@@ -35,13 +38,15 @@ Jede Übung hat einen Ordner `start/` (dein Arbeitsplatz) und `solution/` (Muste
 | 05 | [observable-array](exercises/05-observable-array) | observableArray und arrayChange |
 | 06 | [bindings](exercises/06-bindings) | Eingebaute Bindings für eine Todo-Liste |
 | 07 | [components](exercises/07-components) | Komponenten mit params und dispose |
-| 08 | [custom-bindings](exercises/08-custom-bindings) | Custom Bindings mit init, update und Disposal |
-| 09 | [typescript-vite](exercises/09-typescript-vite) | Typen, ESM und Vite |
+| 08 | [typescript-vite](exercises/08-typescript-vite) | Typen, ESM und Vite |
+| 09 | [custom-bindings](exercises/09-custom-bindings) | Custom Bindings mit init, update und Disposal |
 | 10 | [testing](exercises/10-testing) | Vitest, happy-dom und Testing Library |
 | 11 | [performance](exercises/11-performance) | deferUpdates und rateLimit |
-| 12 | [security](exercises/12-security) | Kein html-Binding mit Nutzereingaben |
-| 13 | [strangler](exercises/13-strangler) | Knockout als Custom Element, Migration Schritt für Schritt |
-| 14 | [signals-bridge](exercises/14-signals-bridge) | Brücken zu RxJS und Signals |
+| 12 | [strangler](exercises/12-strangler) | Knockout als Custom Element, Migration Schritt für Schritt |
+| 13 | [state-bridge](exercises/13-state-bridge) | Zustand per Store-Vertrag zwischen Knockout und Web Components teilen |
+| 14 | [security](exercises/14-security) | Kein html-Binding mit Nutzereingaben |
+| 15 | [binding-injection](exercises/15-binding-injection) | Eingeschleuste Bindings entschärfen |
+| 16 | [csp](exercises/16-csp) | Content Security Policy, unsafe-eval und Trusted Types |
 
 ## Material von 2015
 

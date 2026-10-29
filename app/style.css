@@ -1,0 +1,16 @@
+/* Eigene Datei statt <style> im HTML: so reicht default-src 'self' in der CSP */
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+li {
+  list-style: none;
+}
+
+li:has(input:checked) span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}

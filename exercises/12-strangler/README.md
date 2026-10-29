@@ -1,6 +1,6 @@
-# 13 · Schrittweise migrieren statt neu schreiben
+# 12 · Schrittweise migrieren statt neu schreiben
 
-Beim Strangler-Muster ersetzt du eine Anwendung Stück für Stück. Die Grenze zwischen alt und neu sind Custom Elements: Attribute rein, Events raus. So läuft eine Knockout-Komponente in einer React- oder Svelte-Seite, und eine neue Web Component läuft in einer Knockout-Seite.
+Beim Strangler-Muster ersetzt du eine Anwendung Stück für Stück. Die Grenze zwischen alt und neu sind Custom Elements: Attribute rein, Events raus. So läuft Knockout-Code auf jeder Seite, die HTML spricht, und eine neue Web Component läuft in einer Knockout-Seite.
 
 ## Aufgabe
 
@@ -10,12 +10,12 @@ Beim Strangler-Muster ersetzt du eine Anwendung Stück für Stück. Die Grenze z
 4. Räum in `disconnectedCallback` auf: `ko.cleanNode`, `dispose` des View Models, Inhalt entfernen.
 5. Vervollständige `ko-counter`: Attribut `start` übernehmen, bei Klick ein `CustomEvent('count-change')` mit `bubbles` und `composed` auslösen.
 
-Der vierte Test zeigt die Gegenrichtung: Eine Knockout-Seite nutzt das Element mit `attr`- und `event`-Binding – genauso bindest du später eine Web Component aus Lit, Svelte oder React ein.
+Der vierte Test zeigt die Gegenrichtung: Eine Knockout-Seite nutzt das Element mit `attr`- und `event`-Binding – genauso bindest du jede neue Web Component ein.
 
 ## Prüfen
 
 ```bash
-npm run test:start -- exercises/13-strangler
+npm run test:start -- exercises/12-strangler
 ```
 
 `npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.

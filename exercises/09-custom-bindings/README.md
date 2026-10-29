@@ -1,4 +1,4 @@
-# 08 · Custom Bindings kapseln das DOM
+# 09 · Custom Bindings kapseln das DOM
 
 Wo du DOM-APIs, Formatierung oder Fremd-Widgets brauchst, gehört der Code in ein Custom Binding – nicht ins View Model. `init` läuft einmal, `update` nach jeder Änderung, und alles, was du anmeldest, meldest du beim Entfernen wieder ab.
 
@@ -13,7 +13,7 @@ Wo du DOM-APIs, Formatierung oder Fremd-Widgets brauchst, gehört der Code in ei
 ## Prüfen
 
 ```bash
-npm run test:start -- exercises/08-custom-bindings
+npm run test:start -- exercises/09-custom-bindings
 ```
 
 `npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
