@@ -42,7 +42,7 @@ npm run build && npx vite preview   # gebaute App mit Content Security Policy (Ã
 | Nr. | Ãœbung | Thema |
 | --- | --- | --- |
 | 01 | [legacy-audit](exercises/01-legacy-audit) | Altlasten im Knockout-Code finden (alte Todo-App) |
-| 02 | [mvvm](exercises/02-mvvm) | Kundendaten: View Model und View trennen |
+| 02 | [mvvm](exercises/02-mvvm) | Kundendaten: ViewModel und View trennen |
 | 03 | [observables](exercises/03-observables) | Menge und Summe: observable, subscribe, peek |
 | 04 | [computed](exercises/04-computed) | Preisfeld: pureComputed mit read und write |
 | 05 | [observable-array](exercises/05-observable-array) | Warenkorb mit observableArray |

@@ -6,7 +6,7 @@ export type CustomerViewModel = {
   greeting: ko.PureComputed<string>
 }
 
-// View Model: Zustand und abgeleitete Werte, kein DOM
+// ViewModel: Zustand und abgeleitete Werte, kein DOM
 export const createCustomerViewModel = (customer: {
   name: string
   email: string

@@ -15,14 +15,22 @@ const setup = () => {
   return { vm, user: userEvent.setup() }
 }
 
+/** Text des Elements, auf das aria-describedby zeigt – also der Grund für die Sperre */
+const description = (button: HTMLElement) => {
+  const id = button.getAttribute('aria-describedby')
+  return id ? document.getElementById(id)?.textContent?.trim() : undefined
+}
+
 const sum = () => screen.getByText(/^Summe:/).textContent?.replace(/\s+/g, ' ')
 
 describe('Werkstatt-Shop mit eingebauten Bindings', () => {
-  it('zeigt Produkte mit Preis und sperrt ausverkaufte', () => {
+  it('zeigt Produkte mit Preis und sperrt ausverkaufte mit Hinweis', () => {
     setup()
     expect(screen.getByText(/^12,90\s€$/)).toBeTruthy()
     const werkbank = screen.getByRole<HTMLButtonElement>('button', { name: 'In den Warenkorb: Werkbank' })
     expect(werkbank.disabled).toBe(true)
+    expect(description(werkbank)).toBe('Ausverkauft')
+    expect(screen.getByRole('button', { name: 'In den Warenkorb: Schraubenset' }).hasAttribute('aria-describedby')).toBe(false)
     expect(screen.getByText('Dein Warenkorb ist leer. Leg oben ein Produkt hinein.')).toBeTruthy()
   })
 
@@ -58,13 +66,16 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     expect(vm.cart.items().map((item) => item.product.name)).toEqual(['Akkuschrauber'])
   })
 
-  it('aktiviert „Bestellen“ erst mit Warenkorb und E-Mail', async () => {
+  it('aktiviert „Bestellen“ erst mit Warenkorb und E-Mail und nennt bis dahin den Grund', async () => {
     const { vm, user } = setup()
     const order = screen.getByRole<HTMLButtonElement>('button', { name: 'Bestellen' })
     expect(order.disabled).toBe(true)
+    expect(description(order)).toBe('Leg zuerst ein Produkt in den Warenkorb.')
     await user.click(screen.getByRole('button', { name: 'In den Warenkorb: Schraubenset' }))
+    expect(description(order)).toBe('Gib deine E-Mail-Adresse ein, dann kannst du bestellen.')
     await user.type(screen.getByLabelText('E-Mail'), 'ada@example.org')
     expect(order.disabled).toBe(false)
+    expect(description(order)).toBe('')
     await user.click(order)
     expect(vm.placed()).toBe(true)
   })
