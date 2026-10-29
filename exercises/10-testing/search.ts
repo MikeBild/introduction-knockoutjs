@@ -16,7 +16,7 @@ export const searchTemplate = `
   <ul data-bind="foreach: { data: results, as: 'product' }">
     <li data-bind="text: product.name"></li>
   </ul>
-  <p data-bind="ifnot: results().length">Keine Treffer</p>
+  <p data-bind="ifnot: results().length">Kein Produkt passt zu deiner Suche. Versuch einen anderen Begriff.</p>
 `
 
 export const mountSearch = (root: HTMLElement, products: Product[]) => {

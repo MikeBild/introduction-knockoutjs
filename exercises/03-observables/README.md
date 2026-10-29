@@ -16,4 +16,4 @@ Ein Observable ist eine Funktion: ohne Argument liest du den Wert, mit Argument 
 npm run test:start -- exercises/03-observables
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

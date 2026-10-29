@@ -17,7 +17,7 @@ export const shopTemplate = `
   </ul>
 
   <h2>Warenkorb</h2>
-  <p data-bind="visible: cart.items().length === 0">Dein Warenkorb ist leer</p>
+  <p data-bind="visible: cart.items().length === 0">Dein Warenkorb ist leer. Leg oben ein Produkt hinein.</p>
   <ul data-bind="foreach: { data: cart.items, as: 'item' }">
     <li>
       <span data-bind="text: item.product.name"></span>
@@ -33,7 +33,7 @@ export const shopTemplate = `
     <label>E-Mail <input type="email" data-bind="textInput: email" /></label>
     <button type="submit" data-bind="enable: canOrder">Bestellen</button>
   </form>
-  <p data-bind="visible: placed">Danke für deine Bestellung!</p>
+  <p data-bind="visible: placed">Danke für deine Bestellung.</p>
 `
 
 export const mountShop = (root: HTMLElement, vm: ShopViewModel): (() => void) => {

@@ -1,6 +1,6 @@
 # 16 · Content Security Policy und Trusted Types
 
-Eine Content Security Policy, kurz CSP, begrenzt, woher eine Seite Code lädt und ausführt. Knockout 3.5 hat dabei eine Eigenheit: Der Binding-Parser übersetzt jeden `data-bind`-Ausdruck mit `new Function`. Ohne `'unsafe-eval'` in `script-src` bindet Knockout 3.5 deshalb gar nichts. Ehrlich gesagt: Die CSP schützt dann weiter vor fremden Skripten, aber nicht vor eingeschleusten Bindings – dafür brauchst du die Übungen 14 und 15. Einen CSP-freundlichen Parser ohne `eval` hat erst TKO (Knockout 4).
+Eine Content Security Policy, kurz CSP, begrenzt, woher eine Seite Code lädt und ausführt. Knockout 3.5 hat dabei eine Eigenheit: Der Binding-Parser übersetzt jeden `data-bind`-Ausdruck mit `new Function`. Ohne `'unsafe-eval'` in `script-src` bindet Knockout 3.5 deshalb gar nichts. Die CSP schützt dann weiter vor fremden Skripten, aber nicht vor eingeschleusten Bindings – dafür brauchst du die Übungen 14 und 15. Einen CSP-freundlichen Parser ohne `eval` hat erst TKO (Knockout 4).
 
 Trusted Types gehen einen Schritt weiter: Mit `require-trusted-types-for 'script'` nimmt der Browser für `innerHTML` nur noch Werte an, die eine Policy erzeugt hat. Knockout 3.5.2 und neuer reichen solche Werte im `html`-Binding durch.
 
@@ -25,4 +25,4 @@ Trusted Types gehen einen Schritt weiter: Mit `require-trusted-types-for 'script
 npm run test:start -- exercises/16-csp
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

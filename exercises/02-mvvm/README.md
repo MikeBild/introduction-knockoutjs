@@ -16,4 +16,4 @@ Model View ViewModel, kurz MVVM, trennt Zustand und Darstellung. Das View Model 
 npm run test:start -- exercises/02-mvvm
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

@@ -9,7 +9,7 @@ ko.options.deferUpdates = true
 registerCartLine()
 
 const root = document.querySelector<HTMLElement>('#app')
-if (!root) throw new Error('#app fehlt in index.html')
+if (!root) throw new Error('#app fehlt in index.html. Ergänze dort <main id="app"></main>.')
 
 root.innerHTML = template
 ko.applyBindings(createShopViewModel(), root)

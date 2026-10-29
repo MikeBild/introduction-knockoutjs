@@ -18,4 +18,4 @@ Der vierte Test zeigt die Gegenrichtung: Eine Knockout-Seite nutzt das Element m
 npm run test:start -- exercises/12-strangler
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

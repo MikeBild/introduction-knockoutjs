@@ -16,6 +16,6 @@ import { describe, it } from 'vitest'
 describe('Produktsuche', () => {
   it.todo('zeigt ohne Suchbegriff alle Produkte als Liste')
   it.todo('filtert beim Tippen ohne Rücksicht auf Groß- und Kleinschreibung')
-  it.todo('zeigt „Keine Treffer“, wenn nichts passt')
+  it.todo('zeigt einen Hinweis, wenn kein Produkt passt')
   it.todo('aktualisiert mit deferUpdates erst nach ko.tasks.runEarly()')
 })

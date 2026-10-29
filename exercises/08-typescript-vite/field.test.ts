@@ -6,14 +6,15 @@ const target = import.meta.env.TARGET
 const impl: typeof Impl = await import(`./${target}/field.ts`)
 const { createField } = impl
 
-const validEmail = (value: string) => (/^\S+@\S+\.\S+$/.test(value) ? null : 'Bitte eine gültige E-Mail')
+const validEmail = (value: string) =>
+  /^\S+@\S+\.\S+$/.test(value) ? null : 'Gib eine E-Mail-Adresse wie name@firma.de ein.'
 const validQuantity = (value: number) =>
-  Number.isInteger(value) && value >= 1 ? null : 'Mindestens 1 Stück'
+  Number.isInteger(value) && value >= 1 ? null : 'Gib eine ganze Menge ab 1 ein.'
 
 describe('createField', () => {
   it('meldet einen Fehler für eine ungültige E-Mail', () => {
     const email = createField('', validEmail)
-    expect(email.error()).toBe('Bitte eine gültige E-Mail')
+    expect(email.error()).toBe('Gib eine E-Mail-Adresse wie name@firma.de ein.')
     expect(email.isValid()).toBe(false)
     email.value('ada@example.org')
     expect(email.error()).toBeNull()

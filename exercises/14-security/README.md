@@ -18,4 +18,4 @@ Hintergrund: Der Binding-Parser von Knockout 3.5 erzeugt Funktionen aus `data-bi
 npm run test:start -- exercises/14-security
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

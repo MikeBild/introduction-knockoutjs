@@ -18,4 +18,4 @@ Wichtig: Knockout ruft `viewModel` mit `new` auf. Eine Arrow Function scheitert 
 npm run test:start -- exercises/07-components
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

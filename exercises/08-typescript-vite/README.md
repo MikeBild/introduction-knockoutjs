@@ -17,4 +17,4 @@ npm run test:start -- exercises/08-typescript-vite
 npm run typecheck
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

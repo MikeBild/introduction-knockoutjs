@@ -16,4 +16,4 @@ Bevor du modernisierst, brauchst du eine Bestandsaufnahme. In dieser Übung schr
 npm run test:start -- exercises/01-legacy-audit
 ```
 
-`npm run test:start` führt die Tests gegen deinen Ordner `start/` aus. Ohne `:start` laufen sie gegen die Musterlösung in `solution/`.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.

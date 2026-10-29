@@ -16,4 +16,4 @@ Knockout aktualisiert standardmäßig synchron: Jede Änderung läuft sofort dur
 npm run test:start -- exercises/11-performance
 ```
 
-`npm run test:start` testet deinen Ordner `start/`, `npm test` die Musterlösung.
+`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
