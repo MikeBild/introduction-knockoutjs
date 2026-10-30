@@ -8,7 +8,7 @@ Ein `pureComputed` rechnet nur, solange jemand zuhört, und schläft sonst. Für
 2. Lass `read` den Preis als Text liefern: `1290` wird „12,90“.
 3. Lass `write` Eingaben wie „12,90“ oder „12.90“ in Cent umrechnen. Runde mit `Math.round`, damit keine Kommazahlen im Zustand landen.
 4. Ignoriere ungültige Eingaben wie „zwölf“, negative Werte oder mehr als zwei Nachkommastellen.
-5. Geh im Kopf jedes `ko.computed` aus deinem Projekt durch: Braucht es Nebenwirkungen? Wenn nicht, wird es ein `pureComputed`.
+5. Geh im Kopf jedes `ko.computed` aus deinem Projekt durch: Braucht es Side Effects? Wenn nicht, wird es ein `pureComputed`.
 
 ## Prüfen
 
