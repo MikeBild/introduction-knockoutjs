@@ -1,9 +1,9 @@
 import ko from 'knockout'
 
-// Produktbewertung im Werkstatt-Shop – body ist Nutzereingabe
+// Product review in the workshop shop – body is user input
 export type Review = { author: string; body: string }
 
-// Nutzereingaben nie mit html binden: text escaped, linkify baut DOM-Knoten selbst
+// Never bind user input with html: text escapes, linkify builds DOM nodes itself
 export const reviewsTemplate = `
   <ul data-bind="foreach: { data: reviews, as: 'review' }">
     <li>
@@ -24,7 +24,7 @@ const isSafeUrl = (candidate: string) => {
   }
 }
 
-// Textknoten plus Links nur für http und https – nie innerHTML
+// Text nodes plus links only for http and https – never innerHTML
 const linkify: ko.BindingHandler<ko.MaybeSubscribable<string>> = {
   update: (element: HTMLElement, valueAccessor) => {
     const text = ko.unwrap(valueAccessor())

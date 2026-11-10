@@ -16,19 +16,19 @@ const names = () =>
     .queryAllByRole('listitem')
     .map((li) => li.textContent)
 
-describe('Produktsuche', () => {
-  it('zeigt ohne Suchbegriff alle Produkte als Liste', () => {
+describe('Product search', () => {
+  it('shows all products as a list without a search term', () => {
     setup()
     expect(names()).toEqual(['Schraubenset', 'Akkuschrauber', 'Werkbank', 'Arbeitshandschuhe'])
   })
 
-  it('filtert beim Tippen ohne Rücksicht auf Groß- und Kleinschreibung', async () => {
+  it('filters while typing regardless of upper and lower case', async () => {
     const { user } = setup()
     await user.type(screen.getByLabelText('Suche'), 'SCHRAUB')
     expect(names()).toEqual(['Schraubenset', 'Akkuschrauber'])
   })
 
-  it('zeigt einen Hinweis, wenn kein Produkt passt', async () => {
+  it('shows a hint when no product matches', async () => {
     const { user } = setup()
     expect(screen.queryByText(/^Kein Produkt passt/)).toBeNull()
     await user.type(screen.getByLabelText('Suche'), 'Hammer')
@@ -36,13 +36,13 @@ describe('Produktsuche', () => {
     expect(screen.getByText('Kein Produkt passt zu deiner Suche. Versuch einen anderen Begriff.')).toBeTruthy()
   })
 
-  it('aktualisiert mit deferUpdates erst nach ko.tasks.runEarly()', () => {
+  it('updates with deferUpdates only after ko.tasks.runEarly()', () => {
     ko.options.deferUpdates = true
     const { vm } = setup()
     vm.query('werk')
     expect(names()).toHaveLength(4)
     ko.tasks.runEarly()
     expect(names()).toEqual(['Werkbank'])
-    // setup.ts setzt deferUpdates nach jedem Test wieder auf false
+    // setup.ts resets deferUpdates to false after every test
   })
 })

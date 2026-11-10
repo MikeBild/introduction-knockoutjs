@@ -3,20 +3,20 @@ import type { ShopViewModel } from '../shop-view.ts'
 
 export { createShopViewModel } from '../shop-view.ts'
 
-// TODO: Produktliste mit foreach: { data: products, as: 'product' }:
-//       Name, Preis (text: $parent.formatCents(product.priceCents)),
-//       Button „In den Warenkorb“ mit click: $parent.add, enable: product.stock > 0
-//       und aria-label „In den Warenkorb: <Name>“ (attr); bei Bestand 0 daneben
-//       <small id="sold-out-<id>">Ausverkauft</small> und am Button aria-describedby darauf
-// TODO: „Dein Warenkorb ist leer. Leg oben ein Produkt hinein.“ nur bei leerem Warenkorb (visible)
-// TODO: Warenkorb mit foreach: { data: cart.items, as: 'item' }: Name,
-//       <input type="number" min="1" aria-label="Menge"> mit value: item.quantityText,
-//       Button „Entfernen“ mit click: $parent.cart.remove und aria-label „Entfernen: <Name>“
-// TODO: Summe mit formatCents(cart.totalCents())
-// TODO: Formular mit submit: placeOrder, Label „E-Mail“ mit textInput: email,
-//       Button „Bestellen“ mit enable: canOrder und aria-describedby="order-hint",
-//       dazu <small id="order-hint"> mit text: orderHint, sichtbar bei !canOrder();
-//       danach „Danke für deine Bestellung.“ (visible: placed)
+// TODO: Product list with foreach: { data: products, as: 'product' }:
+//       name, price (text: $parent.formatCents(product.priceCents)),
+//       button “In den Warenkorb” with click: $parent.add, enable: product.stock > 0
+//       and aria-label “In den Warenkorb: <Name>” (attr); at stock 0 next to it
+//       <small id="sold-out-<id>">Ausverkauft</small> and aria-describedby on the button pointing to it
+// TODO: “Dein Warenkorb ist leer. Leg oben ein Produkt hinein.” only when the cart is empty (visible)
+// TODO: Cart with foreach: { data: cart.items, as: 'item' }: name,
+//       <input type="number" min="1" aria-label="Menge"> with value: item.quantityText,
+//       button “Entfernen” with click: $parent.cart.remove and aria-label “Entfernen: <Name>”
+// TODO: Total with formatCents(cart.totalCents())
+// TODO: Form with submit: placeOrder, label “E-Mail” with textInput: email,
+//       button “Bestellen” with enable: canOrder and aria-describedby="order-hint",
+//       plus <small id="order-hint"> with text: orderHint, visible when !canOrder();
+//       after it “Danke für deine Bestellung.” (visible: placed)
 export const shopTemplate = `
   <h2>Produkte</h2>
   <ul></ul>

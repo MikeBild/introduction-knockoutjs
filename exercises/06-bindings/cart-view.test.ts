@@ -15,7 +15,7 @@ const setup = () => {
   return { vm, user: userEvent.setup() }
 }
 
-/** Text des Elements, auf das aria-describedby zeigt – also der Grund für die Sperre */
+/** Text of the element that aria-describedby points to – that is, the reason the button is disabled */
 const description = (button: HTMLElement) => {
   const id = button.getAttribute('aria-describedby')
   return id ? document.getElementById(id)?.textContent?.trim() : undefined
@@ -23,8 +23,8 @@ const description = (button: HTMLElement) => {
 
 const sum = () => screen.getByText(/^Summe:/).textContent?.replace(/\s+/g, ' ')
 
-describe('Werkstatt-Shop mit eingebauten Bindings', () => {
-  it('zeigt Produkte mit Preis und sperrt ausverkaufte mit Hinweis', () => {
+describe('Workshop shop with built-in bindings', () => {
+  it('shows products with price and disables sold-out ones with a hint', () => {
     setup()
     expect(screen.getByText(/^12,90\s€$/)).toBeTruthy()
     const werkbank = screen.getByRole<HTMLButtonElement>('button', { name: 'In den Warenkorb: Werkbank' })
@@ -34,7 +34,7 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     expect(screen.getByText('Dein Warenkorb ist leer. Leg oben ein Produkt hinein.')).toBeTruthy()
   })
 
-  it('legt Produkte in den Warenkorb und rechnet die Summe', async () => {
+  it('puts products into the cart and calculates the total', async () => {
     const { vm, user } = setup()
     await user.click(screen.getByRole('button', { name: 'In den Warenkorb: Schraubenset' }))
     await user.click(screen.getByRole('button', { name: 'In den Warenkorb: Schraubenset' }))
@@ -44,7 +44,7 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     expect(screen.getByText('Dein Warenkorb ist leer. Leg oben ein Produkt hinein.').style.display).toBe('none')
   })
 
-  it('übernimmt eine getippte Menge als Zahl und zählt danach weiter', async () => {
+  it('accepts a typed quantity as a number and keeps counting from there', async () => {
     const { vm, user } = setup()
     const add = screen.getByRole('button', { name: 'In den Warenkorb: Arbeitshandschuhe' })
     await user.click(add)
@@ -58,7 +58,7 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     expect(sum()).toBe('Summe: 31,60 €')
   })
 
-  it('entfernt genau die angeklickte Position', async () => {
+  it('removes exactly the clicked line item', async () => {
     const { vm, user } = setup()
     await user.click(screen.getByRole('button', { name: 'In den Warenkorb: Schraubenset' }))
     await user.click(screen.getByRole('button', { name: 'In den Warenkorb: Akkuschrauber' }))
@@ -66,7 +66,7 @@ describe('Werkstatt-Shop mit eingebauten Bindings', () => {
     expect(vm.cart.items().map((item) => item.product.name)).toEqual(['Akkuschrauber'])
   })
 
-  it('aktiviert „Bestellen“ erst mit Warenkorb und E-Mail und nennt bis dahin den Grund', async () => {
+  it('enables “Bestellen” only with cart and email and names the reason until then', async () => {
     const { vm, user } = setup()
     const order = screen.getByRole<HTMLButtonElement>('button', { name: 'Bestellen' })
     expect(order.disabled).toBe(true)

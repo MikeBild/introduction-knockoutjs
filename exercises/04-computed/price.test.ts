@@ -8,8 +8,8 @@ const target = import.meta.env.TARGET
 const impl: typeof Impl = await import(`./${target}/price.ts`)
 const { createPriceInput } = impl
 
-describe('Schreibbares pureComputed für Preise', () => {
-  it('zeigt Cent als Euro-Text mit Komma', () => {
+describe('Writable pureComputed for prices', () => {
+  it('shows cents as euro text with a decimal comma', () => {
     const price = createPriceInput(1290)
     expect(price.priceText()).toBe('12,90')
     price.priceCents(8990)
@@ -17,7 +17,7 @@ describe('Schreibbares pureComputed für Preise', () => {
     expect(ko.isPureComputed(price.priceText)).toBe(true)
   })
 
-  it('rechnet Eingaben mit Komma oder Punkt in ganze Cent um', () => {
+  it('converts input with comma or period into whole cents', () => {
     const price = createPriceInput(0)
     price.priceText('12,90')
     expect(price.priceCents()).toBe(1290)
@@ -27,7 +27,7 @@ describe('Schreibbares pureComputed für Preise', () => {
     expect(price.priceCents()).toBe(24900)
   })
 
-  it('ignoriert ungültige Eingaben', () => {
+  it('ignores invalid input', () => {
     const price = createPriceInput(1290)
     price.priceText('zwölf')
     price.priceText('-3,00')
@@ -35,7 +35,7 @@ describe('Schreibbares pureComputed für Preise', () => {
     expect(price.priceCents()).toBe(1290)
   })
 
-  it('funktioniert als Zwei-Wege-Binding', async () => {
+  it('works as a two-way binding', async () => {
     document.body.innerHTML = `
       <label>Preis <input data-bind="value: priceText" /></label>
       <output data-bind="text: priceCents"></output>`

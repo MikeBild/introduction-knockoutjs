@@ -1,28 +1,30 @@
-# 16 · Content Security Policy und Trusted Types
+*English · [Deutsch](README.de.md)*
 
-Eine Content Security Policy, kurz CSP, begrenzt, woher eine Seite Code lädt und ausführt. Knockout 3.5 hat dabei eine Eigenheit: Der Binding-Parser übersetzt jeden `data-bind`-Ausdruck mit `new Function`. Ohne `'unsafe-eval'` in `script-src` bindet Knockout 3.5 deshalb gar nichts. Die CSP schützt dann weiter vor fremden Skripten, aber nicht vor eingeschleusten Bindings – dafür brauchst du die Übungen 14 und 15. Einen CSP-freundlichen Parser ohne `eval` hat erst TKO (Knockout 4).
+# 16 · Content Security Policy and Trusted Types
 
-Trusted Types gehen einen Schritt weiter: Mit `require-trusted-types-for 'script'` nimmt der Browser für `innerHTML` nur noch Werte an, die eine Policy erzeugt hat. Knockout 3.5.2 und neuer reichen solche Werte im `html`-Binding durch.
+A Content Security Policy, CSP for short, limits where a page loads and runs code from. Knockout 3.5 has a peculiarity here: the binding parser translates every `data-bind` expression with `new Function`. Without `'unsafe-eval'` in `script-src`, Knockout 3.5 therefore binds nothing at all. The CSP still protects against third-party scripts, but not against injected bindings – for that you need exercises 14 and 15. A CSP-friendly parser without `eval` only arrives with TKO (Knockout 4).
 
-## Aufgabe
+Trusted Types go one step further: with `require-trusted-types-for 'script'`, the browser only accepts values for `innerHTML` that a policy has produced. Knockout 3.5.2 and newer pass such values through in the `html` binding.
 
-1. Öffne `start/csp.ts` und baue in `buildCsp` den Header-String aus den Direktiven im Kommentar.
-2. Implementiere `createHtmlPolicy`: Gibt es `globalThis.trustedTypes`, erzeugst du die Policy `knockout-html`. Sonst gibst du `{ createHTML: sanitize }` zurück. happy-dom kennt keine Trusted Types, deshalb brauchst du den Fallback.
-3. Lies den Test zum `html`-Binding: Nur was durch die Policy gelaufen ist, landet im DOM.
-4. Bau die App und starte die Vorschau mit CSP:
+## Task
+
+1. Open `start/csp.ts` and build the header string in `buildCsp` from the directives in the comment.
+2. Implement `createHtmlPolicy`: if `globalThis.trustedTypes` exists, create the policy `knockout-html`. Otherwise return `{ createHTML: sanitize }`. happy-dom has no Trusted Types, so you need the fallback.
+3. Read the test for the `html` binding: only what has passed through the policy ends up in the DOM.
+4. Build the app and start the preview with CSP:
 
    ```bash
    npm run build
    npx vite preview
    ```
 
-   `vite.config.ts` setzt den Header aus `buildCsp({ allowEval: true })`. Öffne die App und prüf in den DevTools unter Network den Header `Content-Security-Policy`.
-5. Probe: Setz in `vite.config.ts` `allowEval: false`, bau neu und lade die Vorschau. Die Konsole meldet einen CSP-Verstoß, die Produktliste bleibt leer. Danach wieder zurückstellen.
+   `vite.config.ts` sets the header from `buildCsp({ allowEval: true })`. Open the app and check the header `Content-Security-Policy` in the DevTools under Network.
+5. Trial: set `allowEval: false` in `vite.config.ts`, rebuild and load the preview. The console reports a CSP violation, the product list stays empty. Then switch it back.
 
-## Prüfen
+## Check
 
 ```bash
 npm run test:start -- exercises/16-csp
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

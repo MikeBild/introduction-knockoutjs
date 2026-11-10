@@ -4,7 +4,7 @@ import { createShopViewModel } from './shop.ts'
 import template from './shop.html?raw'
 import './style.css'
 
-// Kein globales ko, kein Script-Tag: Knockout kommt als ESM-Import über Vite
+// No global ko, no script tag: Knockout arrives as an ESM import via Vite
 ko.options.deferUpdates = true
 registerCartLine()
 

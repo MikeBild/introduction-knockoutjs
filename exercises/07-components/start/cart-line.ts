@@ -4,7 +4,7 @@ import type { CartItem } from '../cart.ts'
 
 export type CartLineParams = { item: CartItem; onRemove: (item: CartItem) => void }
 
-// Achtung: Knockout ruft viewModel mit new auf – eine Arrow Function funktioniert hier nicht.
+// Note: Knockout calls viewModel with new – an Arrow Function does not work here.
 export class CartLineViewModel {
   readonly item: CartItem
   readonly lineTotalCents: ko.PureComputed<number>
@@ -15,27 +15,27 @@ export class CartLineViewModel {
   constructor(params: CartLineParams) {
     this.item = params.item
     this.onRemove = params.onRemove
-    // TODO: Positionssumme in Cent: Menge × priceCents
+    // TODO: Line total in cents: quantity × priceCents
     this.lineTotalCents = ko.pureComputed(() => 0)
-    // TODO: item.quantity abonnieren, bei jeder Änderung changedAt(new Date()) setzen,
-    //       die Subscription in einem Feld merken
+    // TODO: Subscribe to item.quantity, set changedAt(new Date()) on every change,
+    //       remember the subscription in a field
   }
 
-  // TODO: onRemove mit der eigenen Position aufrufen
+  // TODO: Call onRemove with its own line item
   remove = () => {}
 
-  // TODO: Subscription aufräumen
+  // TODO: Clean up the subscription
   dispose() {}
 }
 
-// TODO: Name, Mengenfeld (value: item.quantityText, aria-label „Menge: <Name>“),
-//       Positionssumme mit formatCents(lineTotalCents()), „geändert“ nur bei changedAt,
-//       Button „Entfernen“ mit click: remove und aria-label „Entfernen: <Name>“
+// TODO: Name, quantity field (value: item.quantityText, aria-label “Menge: <Name>”),
+//       line total with formatCents(lineTotalCents()), “geändert” only when changedAt is set,
+//       button “Entfernen” with click: remove and aria-label “Entfernen: <Name>”
 const template = `
   <span data-bind="text: item.product.name"></span>
 `
 
-// TODO: Komponente 'cart-line' nur einmal registrieren (ko.components.isRegistered)
+// TODO: Register the component 'cart-line' only once (ko.components.isRegistered)
 export const registerCartLine = () => {
   void template
 }

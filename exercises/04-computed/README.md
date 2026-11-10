@@ -1,19 +1,21 @@
-# 04 · pureComputed statt computed
+*English · [Deutsch](README.de.md)*
 
-Ein `pureComputed` rechnet nur, solange jemand zuhört, und schläft sonst. Für abgeleitete Werte ist es deshalb die Standardwahl. Mit `read` und `write` wird es schreibbar – wie das Beispiel aus `legacy/5-decomposing.md`, hier für ein Preisfeld im Werkstatt-Shop: intern ganze Cent, im Eingabefeld Euro mit Komma.
+# 04 · pureComputed instead of computed
 
-## Aufgabe
+A `pureComputed` only evaluates while someone is listening and sleeps otherwise. That makes it the default choice for derived values. With `read` and `write` it becomes writable – like the example in `archive/5-decomposing.md`, here for a price field in the workshop shop: whole cents internally, euros with a decimal comma in the input field.
 
-1. Öffne `start/price.ts`.
-2. Lass `read` den Preis als Text liefern: `1290` wird „12,90“.
-3. Lass `write` Eingaben wie „12,90“ oder „12.90“ in Cent umrechnen. Runde mit `Math.round`, damit keine Kommazahlen im Zustand landen.
-4. Ignoriere ungültige Eingaben wie „zwölf“, negative Werte oder mehr als zwei Nachkommastellen.
-5. Geh im Kopf jedes `ko.computed` aus deinem Projekt durch: Braucht es Side Effects? Wenn nicht, wird es ein `pureComputed`.
+## Task
 
-## Prüfen
+1. Open `start/price.ts`.
+2. Let `read` return the price as text: `1290` becomes “12,90”.
+3. Let `write` convert input such as “12,90” or “12.90” into cents. Round with `Math.round` so that no fractional numbers end up in the state.
+4. Ignore invalid input such as “zwölf”, negative values or more than two decimal places.
+5. Go through every `ko.computed` in your own project in your head: does it need Side Effects? If not, it becomes a `pureComputed`.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/04-computed
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

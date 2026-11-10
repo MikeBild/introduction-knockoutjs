@@ -4,7 +4,7 @@ import type { CartItem } from '../cart.ts'
 
 export type CartLineParams = { item: CartItem; onRemove: (item: CartItem) => void }
 
-// Klasse als viewModel: Knockout ruft new mit den params auf und später dispose
+// Class as viewModel: Knockout calls new with the params and later dispose
 export class CartLineViewModel {
   readonly item: CartItem
   readonly lineTotalCents: ko.PureComputed<number>
@@ -22,7 +22,7 @@ export class CartLineViewModel {
 
   remove = () => this.onRemove(this.item)
 
-  // Läuft, wenn Knockout das Element entfernt – sonst hält die Subscription die Komponente fest
+  // Runs when Knockout removes the element – otherwise the subscription keeps the component alive
   dispose() {
     this.subscription.dispose()
   }

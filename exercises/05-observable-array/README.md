@@ -1,19 +1,21 @@
-# 05 · observableArray verfolgt die Liste, nicht die Einträge
+*English · [Deutsch](README.de.md)*
 
-Ein `observableArray` meldet, wenn Einträge hinzukommen, wegfallen oder sich verschieben. Ob sich die Menge einer Position ändert, meldet es nicht – dafür braucht jede Position ein eigenes Observable. Beispiel ist der Warenkorb des Werkstatt-Shops (`exercises/shop.ts`), Geld immer in ganzen Cent.
+# 05 · observableArray tracks the list, not the entries
 
-## Aufgabe
+An `observableArray` reports when entries are added, removed or moved. It does not report when the quantity of a line item changes – for that, every line item needs an Observable of its own. The example is the cart of the workshop shop (`exercises/shop.ts`), money always in whole cents.
 
-1. Öffne `start/cart.ts`.
-2. Implementiere `add`: Liegt das Produkt schon im Warenkorb, erhöhst du die Menge, sonst legst du eine Position mit Menge 1 an.
-3. Implementiere `remove` und `clear` mit `items.remove(...)` und `items.removeAll()`.
-4. Lass `totalCents` die Summe aus Menge mal `priceCents` bilden und `itemCount` alle Mengen zählen. Lies dafür in der Schleife `item.quantity()`.
-5. Vergleiche mit der alten Todo-App in `legacy/examples/Todos`: Warum braucht `ko.dependentObservable` dort ein `this` als zweites Argument?
+## Task
 
-## Prüfen
+1. Open `start/cart.ts`.
+2. Implement `add`: if the product is already in the cart, increase the quantity, otherwise create a line item with quantity 1.
+3. Implement `remove` and `clear` with `items.remove(...)` and `items.removeAll()`.
+4. Let `totalCents` sum up quantity times `priceCents` and let `itemCount` count all quantities. To do so, read `item.quantity()` inside the loop.
+5. Compare with the old Todo app in `archive/examples/Todos`: why does `ko.dependentObservable` need a `this` as its second argument there?
+
+## Check
 
 ```bash
 npm run test:start -- exercises/05-observable-array
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

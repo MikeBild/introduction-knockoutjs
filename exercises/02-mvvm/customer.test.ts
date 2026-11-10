@@ -16,20 +16,20 @@ const setup = () => {
   return { root, vm, unmount }
 }
 
-describe('Kunde im MVVM', () => {
-  it('berechnet die Überschrift im ViewModel ohne DOM', () => {
+describe('Customer in MVVM', () => {
+  it('computes the heading in the ViewModel without DOM', () => {
     const vm = createCustomerViewModel({ name: 'Grace', email: 'grace@example.org' })
     expect(vm.greeting()).toBe('Bestellung für Grace')
     vm.name('Grace Hopper')
     expect(vm.greeting()).toBe('Bestellung für Grace Hopper')
   })
 
-  it('zeigt die Überschrift', () => {
+  it('shows the heading', () => {
     setup()
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe('Bestellung für Ada')
   })
 
-  it('aktualisiert ViewModel und Überschrift bei jeder Eingabe', async () => {
+  it('updates ViewModel and heading on every input', async () => {
     const { vm } = setup()
     const user = userEvent.setup()
     const name = screen.getByLabelText('Name')
@@ -42,7 +42,7 @@ describe('Kunde im MVVM', () => {
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe('Bestellung für Margaret')
   })
 
-  it('löst die Bindings beim Aufräumen', () => {
+  it('releases the bindings on cleanup', () => {
     const { root, vm, unmount } = setup()
     unmount()
     vm.name('Hedy')

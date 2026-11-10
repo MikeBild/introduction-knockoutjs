@@ -6,7 +6,7 @@ export type CustomerViewModel = {
   greeting: ko.PureComputed<string>
 }
 
-// ViewModel: Zustand und abgeleitete Werte, kein DOM
+// ViewModel: state and derived values, no DOM
 export const createCustomerViewModel = (customer: {
   name: string
   email: string
@@ -17,14 +17,14 @@ export const createCustomerViewModel = (customer: {
   return { name, email, greeting }
 }
 
-// View: deklarative Bindings, keine Logik
+// View: declarative bindings, no logic
 export const customerTemplate = `
   <h2 data-bind="text: greeting"></h2>
   <label>Name <input data-bind="textInput: name" /></label>
   <label>E-Mail <input type="email" data-bind="textInput: email" /></label>
 `
 
-// Bindet genau einen Teilbaum und gibt das Aufräumen zurück
+// Binds exactly one subtree and returns the cleanup
 export const mountCustomer = (root: HTMLElement, vm: CustomerViewModel): (() => void) => {
   root.innerHTML = customerTemplate
   ko.applyBindings(vm, root)

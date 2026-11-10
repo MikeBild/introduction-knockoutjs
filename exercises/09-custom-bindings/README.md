@@ -1,19 +1,21 @@
-# 09 · Custom Bindings kapseln das DOM
+*English · [Deutsch](README.de.md)*
 
-Wo du DOM-APIs, Formatierung oder Fremd-Widgets brauchst, gehört der Code in ein Custom Binding – nicht ins ViewModel. `init` läuft einmal, `update` nach jeder Änderung, und alles, was du anmeldest, meldest du beim Entfernen wieder ab.
+# 09 · Custom bindings encapsulate the DOM
 
-## Aufgabe
+Wherever you need DOM APIs, formatting or third-party widgets, the code belongs in a custom binding – not in the ViewModel. `init` runs once, `update` after every change, and everything you register, you unregister on removal.
 
-1. Öffne `start/bindings.ts`.
-2. Lass `currency` den Wert in ganzen Cent mit `ko.unwrap` lesen und mit `formatCents` aus `exercises/shop.ts` als Euro anzeigen. So funktioniert das Binding mit Observables und mit festen Zahlen.
-3. Melde in `clickOutside` einen Klick-Listener am `document` an. Ruf den Handler nur bei Klicks außerhalb des Elements auf – so schließt sich der Mini-Warenkorb des Werkstatt-Shops.
-4. Entferne den Listener mit `ko.utils.domNodeDisposal.addDisposeCallback`.
-5. Prüf: Was passiert ohne Dispose-Callback, wenn eine Komponente hundertmal ein- und ausgeblendet wird?
+## Task
 
-## Prüfen
+1. Open `start/bindings.ts`.
+2. Let `currency` read the value in whole cents with `ko.unwrap` and display it as euros with `formatCents` from `exercises/shop.ts`. That way the binding works with Observables and with plain numbers.
+3. In `clickOutside`, register a click listener on the `document`. Call the handler only for clicks outside the element – that is how the mini cart of the workshop shop closes.
+4. Remove the listener with `ko.utils.domNodeDisposal.addDisposeCallback`.
+5. Check: what happens without a dispose callback when a component is shown and hidden a hundred times?
+
+## Check
 
 ```bash
 npm run test:start -- exercises/09-custom-bindings
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

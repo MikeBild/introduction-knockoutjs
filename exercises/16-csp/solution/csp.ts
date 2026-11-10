@@ -1,5 +1,5 @@
 export type CspOptions = {
-  // Knockout 3.5 übersetzt data-bind-Ausdrücke mit new Function – ohne 'unsafe-eval' bindet nichts
+  // Knockout 3.5 translates data-bind expressions with new Function – without 'unsafe-eval' nothing binds
   allowEval: boolean
   reportTo?: string
   trustedTypes?: boolean
@@ -22,8 +22,8 @@ type TrustedTypesFactory = {
   createPolicy(name: string, rules: { createHTML: Sanitize }): HtmlPolicy
 }
 
-// Trusted Types: nur diese Policy darf HTML erzeugen. Knockout 3.5.2+ reicht TrustedHTML im html-Binding durch.
-// Ohne Browser-Support (oder in happy-dom) gilt derselbe Vertrag als einfacher Fallback.
+// Trusted Types: only this policy may create HTML. Knockout 3.5.2+ passes TrustedHTML through in the html binding.
+// Without browser support (or in happy-dom) the same contract applies as a simple fallback.
 export const createHtmlPolicy = (sanitize: Sanitize): HtmlPolicy => {
   const factory = (globalThis as { trustedTypes?: TrustedTypesFactory }).trustedTypes
   return factory?.createPolicy('knockout-html', { createHTML: sanitize }) ?? { createHTML: sanitize }

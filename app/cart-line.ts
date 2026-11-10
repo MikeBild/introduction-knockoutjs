@@ -4,7 +4,7 @@ import { formatCents } from '../exercises/shop.ts'
 
 type CartLineParams = { item: CartItem; onRemove: (item: CartItem) => void }
 
-// Komponente aus Übung 07: eine Warenkorb-Zeile mit Positionssumme
+// Component from exercise 07: a cart line with its line total
 class CartLineViewModel {
   readonly item: CartItem
   readonly lineTotalCents: ko.PureComputed<number>

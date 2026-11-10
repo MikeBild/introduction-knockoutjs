@@ -1,19 +1,21 @@
-# 11 · deferUpdates und rateLimit gezielt einsetzen
+*English · [Deutsch](README.de.md)*
 
-Knockout aktualisiert standardmäßig synchron: Jede Änderung läuft sofort durch alle Computeds und Bindings. `deferUpdates` bündelt Änderungen in einer Microtask, `rateLimit` drosselt einzelne Observables – etwa die Produktsuche des Werkstatt-Shops während der Eingabe.
+# 11 · Use deferUpdates and rateLimit deliberately
 
-## Aufgabe
+By default Knockout updates synchronously: every change runs through all computeds and bindings immediately. `deferUpdates` batches changes in a microtask, `rateLimit` throttles individual Observables – for example the product search of the workshop shop while the user is typing.
 
-1. Öffne `start/search.ts`.
-2. Drossle `query` mit `extend({ rateLimit: { timeout: 300, method: 'notifyWhenChangesStop' } })`. Die Suche lädt dann erst, wenn die Eingabe 300 Millisekunden ruht.
-3. Schalte in `enableDeferredUpdates` die Option `ko.options.deferUpdates` ein.
-4. Lies die Tests: Sie nutzen `vi.useFakeTimers()` für `rateLimit` und `ko.tasks.runEarly()` für `deferUpdates`.
-5. Überleg für dein Projekt: Wo würde `deferUpdates` global helfen, und wo brauchst du gezielt `rateLimit`?
+## Task
 
-## Prüfen
+1. Open `start/search.ts`.
+2. Throttle `query` with `extend({ rateLimit: { timeout: 300, method: 'notifyWhenChangesStop' } })`. The search then only loads once the input has been idle for 300 milliseconds.
+3. In `enableDeferredUpdates`, switch on the option `ko.options.deferUpdates`.
+4. Read the tests: they use `vi.useFakeTimers()` for `rateLimit` and `ko.tasks.runEarly()` for `deferUpdates`.
+5. Think about your own project: where would `deferUpdates` help globally, and where do you need `rateLimit` for specific cases?
+
+## Check
 
 ```bash
 npm run test:start -- exercises/11-performance
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

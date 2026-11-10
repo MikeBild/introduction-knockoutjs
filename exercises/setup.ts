@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import { afterEach, vi } from 'vitest'
 
-// Nach jedem Test: Bindings lösen, DOM leeren, globale Knockout-Optionen zurücksetzen
+// After every test: release bindings, clear the DOM, reset global Knockout options
 afterEach(() => {
   ko.cleanNode(document.body)
   document.body.innerHTML = ''

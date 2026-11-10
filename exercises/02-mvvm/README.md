@@ -1,19 +1,21 @@
-# 02 · ViewModel und View sauber trennen
+*English · [Deutsch](README.de.md)*
 
-Model View ViewModel, kurz MVVM, trennt Zustand und Darstellung. Das ViewModel kennt kein DOM, die View enthält keine Logik, die Bindings verbinden beide. Beispiel ist die Kundenangabe im Werkstatt-Shop.
+# 02 · Separate ViewModel and View cleanly
 
-## Aufgabe
+Model View ViewModel, MVVM for short, separates state from presentation. The ViewModel knows nothing about the DOM, the View contains no logic, and the bindings connect the two. The example is the customer details in the workshop shop.
 
-1. Öffne `start/customer.ts`.
-2. Lege in `createCustomerViewModel` die `greeting` als `ko.pureComputed` an: „Bestellung für <Name>“.
-3. Schreib `customerTemplate`: eine `<h2>` mit `text: greeting` und zwei `<label>` „Name“ und „E-Mail“ mit `<input>` und `textInput`.
-4. Binde in `mountCustomer` nur den übergebenen Teilbaum mit `ko.applyBindings(vm, root)` – nie das ganze Dokument.
-5. Gib eine Funktion zurück, die mit `ko.cleanNode(root)` aufräumt.
+## Task
 
-## Prüfen
+1. Open `start/customer.ts`.
+2. In `createCustomerViewModel`, create `greeting` as a `ko.pureComputed`: “Bestellung für <Name>” (the UI text is German, the tests expect it).
+3. Write `customerTemplate`: an `<h2>` with `text: greeting` and two `<label>` elements “Name” and “E-Mail”, each with an `<input>` and `textInput`.
+4. In `mountCustomer`, bind only the subtree you are given with `ko.applyBindings(vm, root)` – never the whole document.
+5. Return a function that cleans up with `ko.cleanNode(root)`.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/02-mvvm
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

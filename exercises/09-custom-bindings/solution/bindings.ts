@@ -1,14 +1,14 @@
 import ko from 'knockout'
 import { formatCents } from '../../shop.ts'
 
-// update läuft beim Binden und nach jeder Änderung der gelesenen Observables; der Wert sind ganze Cent
+// update runs on binding and after every change of the Observables it read; the value is whole cents
 const currency: ko.BindingHandler<ko.MaybeSubscribable<number>> = {
   update: (element: HTMLElement, valueAccessor) => {
     element.textContent = formatCents(ko.unwrap(valueAccessor()))
   },
 }
 
-// init läuft einmal; was du dort anmeldest, meldest du im Dispose-Callback wieder ab
+// init runs once; whatever you register there, you unregister in the dispose callback
 const clickOutside: ko.BindingHandler<(event: MouseEvent) => void> = {
   init: (element: HTMLElement, valueAccessor) => {
     const handler = (event: MouseEvent) => {

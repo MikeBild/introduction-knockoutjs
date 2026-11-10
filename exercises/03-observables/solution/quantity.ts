@@ -1,6 +1,6 @@
 import ko from 'knockout'
 
-// Ein Observable ist eine Funktion: ohne Argument lesen, mit Argument schreiben
+// An Observable is a function: read without an argument, write with one
 export const createQuantity = (start = 1) => {
   const quantity = ko.observable(Math.max(1, start))
   return {
@@ -10,7 +10,7 @@ export const createQuantity = (start = 1) => {
   }
 }
 
-// subscribe liefert eine Subscription, dispose beendet sie
+// subscribe returns a Subscription, dispose ends it
 export const recordChanges = <T>(source: ko.Subscribable<T>): { values: T[]; dispose(): void } => {
   const values: T[] = []
   const subscription = source.subscribe((value) => {
@@ -19,7 +19,7 @@ export const recordChanges = <T>(source: ko.Subscribable<T>): { values: T[]; dis
   return { values, dispose: () => subscription.dispose() }
 }
 
-// peek liest einen Wert, ohne eine Abhängigkeit anzulegen
+// peek reads a value without creating a dependency
 export const createAuditedTotal = (
   priceCents: ko.Observable<number>,
   quantity: ko.Observable<number>,

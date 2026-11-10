@@ -9,7 +9,7 @@ const { auditLegacy } = impl
 const rulesOf = (source: string) => auditLegacy(source).map((finding) => finding.rule)
 
 describe('auditLegacy', () => {
-  it('findet ko.dependentObservable in der alten Todo-App mit Zeilennummer', () => {
+  it('finds ko.dependentObservable in the old Todo app with line number', () => {
     const findings = auditLegacy(legacyTodosApp).filter((f) => f.rule === 'dependent-observable')
     expect(findings).toEqual([
       { rule: 'dependent-observable', line: 31 },
@@ -17,18 +17,18 @@ describe('auditLegacy', () => {
     ])
   })
 
-  it('meldet das globale ko.applyBindings ohne ESM-Import', () => {
+  it('reports the global ko.applyBindings without ESM import', () => {
     expect(rulesOf(legacyTodosApp)).toContain('global-ko')
   })
 
-  it('findet html-Binding, Inline-Function, jQuery-Template und Mapping-Plugin im Markup', () => {
+  it('finds html binding, inline function, jQuery template and mapping plugin in the markup', () => {
     const rules = new Set(rulesOf(legacyMarkup))
     expect(rules).toEqual(
       new Set(['html-binding', 'inline-function', 'jquery-template', 'mapping-plugin', 'global-ko']),
     )
   })
 
-  it('lässt ein modernes ESM-Modul ohne Befund', () => {
+  it('leaves a modern ESM module without findings', () => {
     expect(auditLegacy(modernModule)).toEqual([])
   })
 })

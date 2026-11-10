@@ -6,7 +6,7 @@ export type CustomerViewModel = {
   greeting: ko.PureComputed<string>
 }
 
-// TODO: greeting als pureComputed: „Bestellung für <Name>“
+// TODO: greeting as a pureComputed: “Bestellung für <Name>”
 export const createCustomerViewModel = (customer: {
   name: string
   email: string
@@ -17,12 +17,12 @@ export const createCustomerViewModel = (customer: {
   return { name, email, greeting }
 }
 
-// TODO: <h2> mit text: greeting, zwei Labels „Name“ und „E-Mail“ mit Inputs (textInput)
+// TODO: <h2> with text: greeting, two labels “Name” and “E-Mail” with inputs (textInput)
 export const customerTemplate = `
   <h2></h2>
 `
 
-// TODO: Template einsetzen, ko.applyBindings nur auf root, Cleanup mit ko.cleanNode zurückgeben
+// TODO: Insert the template, ko.applyBindings on root only, return the cleanup with ko.cleanNode
 export const mountCustomer = (root: HTMLElement, vm: CustomerViewModel): (() => void) => {
   void vm
   root.innerHTML = customerTemplate

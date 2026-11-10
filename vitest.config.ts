@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config'
 
-// TARGET=start prüft deinen Startpunkt im Ordner start/, ohne Angabe laufen die Lösungen in solution/.
+// TARGET=start checks your starting point in the folder start/; without it, the reference solutions in solution/ run.
 const target = process.env.TARGET === 'start' ? 'start' : 'solution'
 
 export default defineConfig({

@@ -1,19 +1,21 @@
-# 13 · Zustand zwischen alter und neuer Welt teilen
+*English · [Deutsch](README.de.md)*
 
-Während einer Migration brauchen Knockout-Seiten und neue Web Components denselben Zustand, etwa einen Warenkorb. Statt ihn doppelt zu pflegen, einigst du dich auf einen kleinen, framework-neutralen Vertrag: `get()` und `subscribe(listener)`, das eine Abmeldefunktion zurückgibt. Keine Library, nur TypeScript.
+# 13 · Share state between the old and the new world
 
-## Aufgabe
+During a migration, Knockout pages and new Web Components need the same state, for example a cart. Instead of maintaining it twice, you agree on a small, framework-neutral contract: `get()` and `subscribe(listener)`, which returns an unsubscribe function. No library, just TypeScript.
 
-1. Öffne `start/bridge.ts`.
-2. Implementiere `createStore`: aktueller Wert, Listener in einem `Set`, `set` ignoriert gleiche Werte.
-3. Implementiere `toStore`: `get` liest per `peek` ohne Abhängigkeit, `subscribe` meldet nur Änderungen und gibt eine Funktion zurück, die die Knockout-Subscription beendet.
-4. Implementiere `fromStore`: Startwert über `get`, danach jede Änderung. Nach außen gibst du nur ein `pureComputed` heraus, `dispose` meldet sich ab.
-5. Lies `CartBadge`: Die Web Component bekommt den Store als Property und meldet sich in `disconnectedCallback` ab. Brücken ohne Abmelden sind die häufigsten Speicherlecks einer Migration.
+## Task
 
-## Prüfen
+1. Open `start/bridge.ts`.
+2. Implement `createStore`: current value, listeners in a `Set`, `set` ignores equal values.
+3. Implement `toStore`: `get` reads via `peek` without creating a dependency, `subscribe` reports changes only and returns a function that ends the Knockout subscription.
+4. Implement `fromStore`: initial value via `get`, then every change. To the outside you only expose a `pureComputed`; `dispose` unsubscribes.
+5. Read `CartBadge`: the Web Component receives the store as a property and unsubscribes in `disconnectedCallback`. Bridges that never unsubscribe are the most common memory leaks of a migration.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/13-state-bridge
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

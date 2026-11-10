@@ -8,7 +8,7 @@ export type Rule =
 
 export type Finding = { rule: Rule; line: number }
 
-// Je Regel ein Muster, das eine Zeile als Altlast markiert
+// One pattern per rule that flags a line as outdated
 const rules: Array<{ rule: Rule; pattern: RegExp }> = [
   { rule: 'dependent-observable', pattern: /\bko\.dependentObservable\s*\(/ },
   { rule: 'html-binding', pattern: /data-bind\s*=\s*["'][^"']*\bhtml\s*:/ },

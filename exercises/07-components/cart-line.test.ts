@@ -23,15 +23,15 @@ const setup = (count: number) => {
   return { root, cart, user: userEvent.setup() }
 }
 
-describe('Komponente cart-line', () => {
-  it('rendert je Position eine Zeile mit Summe – Komponenten laden asynchron', async () => {
+describe('Component cart-line', () => {
+  it('renders one line with total per line item – components load asynchronously', async () => {
     setup(2)
     expect(await screen.findByRole('spinbutton', { name: 'Menge: Schraubenset' })).toBeTruthy()
     expect(screen.getAllByRole('spinbutton')).toHaveLength(2)
     expect(screen.getByText(/^89,90\s€$/)).toBeTruthy()
   })
 
-  it('rechnet die Positionssumme bei neuer Menge neu und zeigt den Hinweis', async () => {
+  it('recalculates the line total on a new quantity and shows the hint', async () => {
     const { user } = setup(1)
     const quantity = await screen.findByRole('spinbutton', { name: 'Menge: Schraubenset' })
     await user.clear(quantity)
@@ -41,13 +41,13 @@ describe('Komponente cart-line', () => {
     expect(screen.getByText('geändert')).toBeTruthy()
   })
 
-  it('ruft onRemove mit der eigenen Position auf', async () => {
+  it('calls onRemove with its own line item', async () => {
     const { cart, user } = setup(2)
     await user.click(await screen.findByRole('button', { name: 'Entfernen: Akkuschrauber' }))
     expect(cart.items().map((item) => item.product.name)).toEqual(['Schraubenset'])
   })
 
-  it('räumt beim Entfernen alle Subscriptions auf (dispose)', async () => {
+  it('cleans up all subscriptions on removal (dispose)', async () => {
     const { root, cart } = setup(1)
     await screen.findByRole('spinbutton', { name: 'Menge: Schraubenset' })
     const item = cart.items()[0]

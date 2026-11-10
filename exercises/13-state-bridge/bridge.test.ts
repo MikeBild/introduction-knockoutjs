@@ -9,7 +9,7 @@ const impl: typeof Impl = await import(`./${target}/bridge.ts`)
 const { createStore, toStore, fromStore, createSharedCart, defineCartBadge } = impl
 
 describe('createStore', () => {
-  it('meldet neue Werte an alle Listener, bis sie sich abmelden', () => {
+  it('reports new values to all listeners until they unsubscribe', () => {
     const store = createStore(1)
     const listener = vi.fn()
     const unsubscribe = store.subscribe(listener)
@@ -23,7 +23,7 @@ describe('createStore', () => {
 })
 
 describe('Knockout → Store', () => {
-  it('liest den aktuellen Wert und meldet nur Änderungen', () => {
+  it('reads the current value and reports changes only', () => {
     const count = ko.observable(1)
     const store = toStore(count)
     const listener = vi.fn()
@@ -36,7 +36,7 @@ describe('Knockout → Store', () => {
     expect(count.getSubscriptionsCount()).toBe(0)
   })
 
-  it('legt beim Lesen in einem Computed keine Abhängigkeit an', () => {
+  it('creates no dependency when read inside a Computed', () => {
     const count = ko.observable(1)
     const store = toStore(count)
     const snapshot = ko.computed(() => store.get())
@@ -47,7 +47,7 @@ describe('Knockout → Store', () => {
 })
 
 describe('Store → Knockout', () => {
-  it('startet mit get und folgt danach dem Store', () => {
+  it('starts with get and follows the store afterwards', () => {
     const store = createStore('Ada')
     const bridge = fromStore(store)
     expect(bridge.value()).toBe('Ada')
@@ -56,7 +56,7 @@ describe('Store → Knockout', () => {
     expect(ko.isWritableObservable(bridge.value)).toBe(false)
   })
 
-  it('bekommt nach dispose keine Updates mehr', () => {
+  it('receives no more updates after dispose', () => {
     const store = createStore(1)
     const bridge = fromStore(store)
     bridge.dispose()
@@ -65,8 +65,8 @@ describe('Store → Knockout', () => {
   })
 })
 
-describe('Gemeinsamer Warenkorb', () => {
-  it('verbindet eine Knockout-Seite und eine Web Component über denselben Store', async () => {
+describe('Shared cart', () => {
+  it('connects a Knockout page and a Web Component via the same store', async () => {
     const cart = createSharedCart()
     defineCartBadge()
     const items = fromStore(cart)
@@ -88,7 +88,7 @@ describe('Gemeinsamer Warenkorb', () => {
     items.dispose()
   })
 
-  it('meldet die Web Component beim Entfernen vom Store ab', () => {
+  it('unsubscribes the Web Component from the store on removal', () => {
     const cart = createSharedCart()
     defineCartBadge()
     const badge = document.createElement('cart-badge') as Impl.CartBadge

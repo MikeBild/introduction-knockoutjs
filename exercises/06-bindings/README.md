@@ -1,21 +1,23 @@
-# 06 · Welche Bindings brauchst du wirklich?
+*English · [Deutsch](README.de.md)*
 
-Mit einer Handvoll eingebauter Bindings baust du die komplette Oberfläche des Werkstatt-Shops: Produktliste, Warenkorb, Summe und Bestellformular. Du brauchst `foreach` mit `as`, `text`, `click`, `enable`, `attr`, `visible`, `value`, `textInput` und `submit`. Das ViewModel ist fertig (`shop-view.ts`, der Warenkorb aus Übung 05 liegt als `cart.ts` daneben).
+# 06 · Which bindings do you really need?
 
-## Aufgabe
+With a handful of built-in bindings you build the complete UI of the workshop shop: product list, cart, total and order form. You need `foreach` with `as`, `text`, `click`, `enable`, `attr`, `visible`, `value`, `textInput` and `submit`. The ViewModel is ready (`shop-view.ts`; the cart from exercise 05 sits next to it as `cart.ts`). The UI text stays German – the tests check the exact strings.
 
-1. Öffne `start/cart-view.ts`.
-2. Rendere die Produkte mit `foreach: { data: products, as: 'product' }`: Name, Preis über `$parent.formatCents(product.priceCents)` und einen Button „In den Warenkorb“ mit `click: $parent.add`. Ausverkaufte Produkte sperrst du mit `enable: product.stock > 0`. Daneben steht „Ausverkauft“ (`<small>` mit der ID `sold-out-<id>`), und der Button verweist per `aria-describedby` darauf. So erfährt auch ein Screenreader, warum der Button gesperrt ist.
-3. Rendere den Warenkorb mit `foreach: { data: cart.items, as: 'item' }`. Bind die Menge an `value: item.quantityText`, denn das `value`-Binding schreibt Strings. Der Button „Entfernen“ ruft `$parent.cart.remove` auf.
-4. Zeig „Dein Warenkorb ist leer. Leg oben ein Produkt hinein.“ nur bei leerem Warenkorb und darunter die Summe mit `formatCents(cart.totalCents())`.
-5. Baue das Formular mit `submit: placeOrder`, einem Label „E-Mail“ und dem Button „Bestellen“ mit `enable: canOrder`. Solange er gesperrt ist, nennt ein `<small id="order-hint">` mit `text: orderHint` den Grund, und der Button verweist per `aria-describedby="order-hint"` darauf.
+## Task
 
-Gib den Buttons per `attr` ein `aria-label` mit dem Produktnamen, etwa „In den Warenkorb: Schraubenset“. Tests und Screenreader finden sie so eindeutig.
+1. Open `start/cart-view.ts`.
+2. Render the products with `foreach: { data: products, as: 'product' }`: name, price via `$parent.formatCents(product.priceCents)` and a button “In den Warenkorb” with `click: $parent.add`. Disable sold-out products with `enable: product.stock > 0`. Next to it goes “Ausverkauft” (a `<small>` with the ID `sold-out-<id>`), and the button points to it via `aria-describedby`. That way a screen reader also learns why the button is disabled.
+3. Render the cart with `foreach: { data: cart.items, as: 'item' }`. Bind the quantity to `value: item.quantityText`, because the `value` binding writes strings. The button “Entfernen” calls `$parent.cart.remove`.
+4. Show “Dein Warenkorb ist leer. Leg oben ein Produkt hinein.” only when the cart is empty, and below it the total with `formatCents(cart.totalCents())`.
+5. Build the form with `submit: placeOrder`, a label “E-Mail” and the button “Bestellen” with `enable: canOrder`. While it is disabled, a `<small id="order-hint">` with `text: orderHint` names the reason, and the button points to it via `aria-describedby="order-hint"`.
 
-## Prüfen
+Give the buttons an `aria-label` with the product name via `attr`, for example “In den Warenkorb: Schraubenset”. Tests and screen readers can then find them unambiguously.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/06-bindings
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

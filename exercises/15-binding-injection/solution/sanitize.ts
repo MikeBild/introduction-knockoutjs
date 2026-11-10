@@ -1,11 +1,11 @@
-// Entfernt alles, was Knockout oder der Browser als Code ausführen würde, bevor HTML in einen gebundenen Bereich kommt
+// Removes everything that Knockout or the browser would run as code before HTML enters a bound area
 const isBindingAttribute = (name: string) =>
   name === 'data-bind' || name === 'params' || name.startsWith('on')
 
 const isVirtualBinding = (comment: Comment) => /^\s*\/?ko(\s|$)/.test(comment.data)
 
 export const stripBindings = (html: string): string => {
-  // <template> parst das HTML, ohne Skripte auszuführen oder Bilder zu laden
+  // <template> parses the HTML without running scripts or loading images
   const template = document.createElement('template')
   template.innerHTML = html
 

@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import type { Product } from '../shop.ts'
 
-// Gegeben: die Produktsuche des Werkstatt-Shops. Deine Aufgabe sind die Tests, nicht der Code.
+// Given: the product search of the workshop shop. Your task is the tests, not the code.
 export const createProductSearch = (products: Product[]) => {
   const query = ko.observable('')
   const results: ko.PureComputed<Product[]> = ko.pureComputed(() => {

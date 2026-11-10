@@ -15,30 +15,30 @@ export const defineKnockoutElement = (tagName: string, options: KnockoutElementO
 
   class KnockoutElement extends HTMLElement {
     static observedAttributes = observed
-    // Je beobachtetem Attribut ein Observable
+    // One Observable per observed attribute
     private readonly attrs: Attributes = Object.fromEntries(
       observed.map((name) => [name, ko.observable<string | null>(null)]),
     )
 
-    // TODO: neuen Attributwert in das passende Observable schreiben
+    // TODO: Write the new attribute value into the matching Observable
     attributeChangedCallback(name: string, _old: string | null, value: string | null) {
       void name
       void value
     }
 
-    // TODO: Shadow Root anlegen (mode: 'open'), darin ein <div> mit options.template,
-    //       ViewModel mit options.createViewModel(this, this.attrs) erzeugen und auf das <div> binden.
-    //       Warum Shadow DOM? Ein äußeres ko.applyBindings bindet sonst in deinen Inhalt hinein.
+    // TODO: Create a Shadow Root (mode: 'open') with a <div> containing options.template inside,
+    //       create the ViewModel with options.createViewModel(this, this.attrs) and bind it to the <div>.
+    //       Why Shadow DOM? Otherwise an outer ko.applyBindings binds into your content.
     connectedCallback() {}
 
-    // TODO: ko.cleanNode auf das <div>, dispose des ViewModels aufrufen, Inhalt entfernen
+    // TODO: ko.cleanNode on the <div>, call dispose of the ViewModel, remove the content
     disconnectedCallback() {}
   }
 
   customElements.define(tagName, KnockoutElement)
 }
 
-// Beispiel aus dem Werkstatt-Shop: Mengenwahl mit Attribut start und Event quantity-change
+// Example from the workshop shop: quantity picker with attribute start and event quantity-change
 export const defineQuantityElement = () =>
   defineKnockoutElement('ko-quantity', {
     observedAttributes: ['start'],
@@ -50,9 +50,9 @@ export const defineQuantityElement = () =>
       const start = attributes['start'] ?? ko.observable<string | null>(null)
       const toQuantity = (value: string | null) => Math.max(1, Math.trunc(Number(value ?? 1)) || 1)
       const quantity = ko.observable(toQuantity(start()))
-      // TODO: Änderungen an start in quantity übernehmen und die Subscription in dispose beenden
-      // TODO: change setzt die Menge (nie unter 1) und löst CustomEvent 'quantity-change'
-      //       mit detail: quantity(), bubbles und composed aus
+      // TODO: Take over changes to start into quantity and end the subscription in dispose
+      // TODO: change sets the quantity (never below 1) and dispatches CustomEvent 'quantity-change'
+      //       with detail: quantity(), bubbles and composed
       const change = (next: number) => {
         quantity(next)
         void host

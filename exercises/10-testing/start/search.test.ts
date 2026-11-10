@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 
-// Schreib die Tests aus der README. Vorlage für den Aufbau:
+// Write the tests from the README. Template for the structure:
 //
 //   import { products } from '../../shop.ts'
 //   import { mountSearch } from '../search.ts'
@@ -11,11 +11,11 @@ import { describe, it } from 'vitest'
 //   const user = userEvent.setup()
 //   await user.type(screen.getByLabelText('Suche'), 'schraub')
 //
-// Aufräumen übernimmt exercises/setup.ts nach jedem Test.
+// exercises/setup.ts takes care of cleanup after every test.
 
-describe('Produktsuche', () => {
-  it.todo('zeigt ohne Suchbegriff alle Produkte als Liste')
-  it.todo('filtert beim Tippen ohne Rücksicht auf Groß- und Kleinschreibung')
-  it.todo('zeigt einen Hinweis, wenn kein Produkt passt')
-  it.todo('aktualisiert mit deferUpdates erst nach ko.tasks.runEarly()')
+describe('Product search', () => {
+  it.todo('shows all products as a list without a search term')
+  it.todo('filters while typing regardless of upper and lower case')
+  it.todo('shows a hint when no product matches')
+  it.todo('updates with deferUpdates only after ko.tasks.runEarly()')
 })

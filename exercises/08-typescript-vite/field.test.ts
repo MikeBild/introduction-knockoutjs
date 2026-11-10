@@ -12,7 +12,7 @@ const validQuantity = (value: number) =>
   Number.isInteger(value) && value >= 1 ? null : 'Gib eine ganze Menge ab 1 ein.'
 
 describe('createField', () => {
-  it('meldet einen Fehler für eine ungültige E-Mail', () => {
+  it('reports an error for an invalid email', () => {
     const email = createField('', validEmail)
     expect(email.error()).toBe('Gib eine E-Mail-Adresse wie name@firma.de ein.')
     expect(email.isValid()).toBe(false)
@@ -21,19 +21,19 @@ describe('createField', () => {
     expect(email.isValid()).toBe(true)
   })
 
-  it('funktioniert mit jedem Type, etwa einer Menge', () => {
+  it('works with any type, such as a quantity', () => {
     const quantity = createField(0, validQuantity)
     expect(quantity.isValid()).toBe(false)
     quantity.value(3)
     expect(quantity.isValid()).toBe(true)
   })
 
-  it('leitet die Types aus dem Validator ab', () => {
+  it('derives the types from the validator', () => {
     const quantity = createField(1, validQuantity)
     expectTypeOf(quantity.value).toEqualTypeOf<ko.Observable<number>>()
     expectTypeOf(quantity.error).toEqualTypeOf<ko.PureComputed<string | null>>()
     expectTypeOf(quantity.isValid).toEqualTypeOf<ko.PureComputed<boolean>>()
-    // @ts-expect-error – ein String passt nicht in ein Mengenfeld
+    // @ts-expect-error – a string does not fit into a quantity field
     quantity.value('3')
   })
 })

@@ -1,21 +1,23 @@
-# 15 · Eingeschleuste Bindings entschärfen
+*English · [Deutsch](README.de.md)*
 
-Auch ohne `html`-Binding kann Knockout Code ausführen, den ein Angreifer liefert: Rendert der Server Nutzer-HTML in einen Bereich, den Knockout danach bindet, wertet `ko.applyBindings` jedes `data-bind` darin aus. Eine harmlos aussehende Produktbewertung mit `data-bind="text: (function(){ … })()"` wird so zu Code. Das heißt Binding Injection.
+# 15 · Defuse injected bindings
 
-## Aufgabe
+Even without the `html` binding, Knockout can run code that an attacker supplies: if the server renders user HTML into an area that Knockout binds afterwards, `ko.applyBindings` evaluates every `data-bind` inside it. A harmless-looking product review with `data-bind="text: (function(){ … })()"` thus turns into code. This is called Binding Injection.
 
-1. Lies `sanitize.test.ts`. Der erste Test ist die Gegenprobe: Ohne Bereinigung läuft der eingeschleuste Code.
-2. Öffne `start/sanitize.ts` und parse das HTML über ein `<template>`-Element. So laufen dabei keine Skripte.
-3. Entferne an allen Elementen `data-bind`, `params` und alle `on*`-Attribute.
-4. Entferne `<script>`-Elemente und Kommentare, die mit `ko` oder `/ko` beginnen – das sind virtuelle Bindings.
-5. Überleg für dein Projekt: Wo landet Nutzer-HTML in einem Bereich, den Knockout bindet? Besser als jede Bereinigung ist, solche Bereiche gar nicht zu binden.
+## Task
 
-`stripBindings` ersetzt keinen vollständigen HTML-Sanitizer. Es entfernt nur, was Knockout ausführen würde. Für fremdes Markup brauchst du zusätzlich eine Allowlist für Elemente und Attribute.
+1. Read `sanitize.test.ts`. The first test is the counter-check: without sanitizing, the injected code runs.
+2. Open `start/sanitize.ts` and parse the HTML via a `<template>` element. That way no scripts run while parsing.
+3. Remove `data-bind`, `params` and all `on*` attributes from every element.
+4. Remove `<script>` elements and comments that start with `ko` or `/ko` – those are virtual bindings.
+5. Think about your own project: where does user HTML end up in an area that Knockout binds? Better than any sanitizing is not binding such areas at all.
 
-## Prüfen
+`stripBindings` does not replace a complete HTML sanitizer. It only removes what Knockout would execute. For third-party markup you additionally need an allowlist for elements and attributes.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/15-binding-injection
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

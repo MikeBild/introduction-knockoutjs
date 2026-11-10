@@ -11,7 +11,7 @@ const { registerBindings } = impl
 beforeAll(() => registerBindings())
 
 describe('Custom Bindings', () => {
-  it('formatiert Cent als Euro und folgt Änderungen', () => {
+  it('formats cents as euros and follows changes', () => {
     document.body.innerHTML = '<output data-bind="currency: totalCents"></output>'
     const totalCents = ko.observable(123450)
     ko.applyBindings({ totalCents }, document.body)
@@ -21,13 +21,13 @@ describe('Custom Bindings', () => {
     expect(output.textContent).toBe('9,99 €')
   })
 
-  it('akzeptiert auch feste Werte in Cent', () => {
+  it('also accepts fixed values in cents', () => {
     document.body.innerHTML = '<output data-bind="currency: 1290"></output>'
     ko.applyBindings({}, document.body)
     expect(screen.getByRole('status').textContent).toBe('12,90 €')
   })
 
-  it('schließt den Mini-Warenkorb nur bei Klicks außerhalb', async () => {
+  it('closes the mini cart only on clicks outside', async () => {
     document.body.innerHTML = `
       <aside data-bind="visible: open, clickOutside: close">
         <p>Warenkorb</p><button>Zur Kasse</button>
@@ -44,7 +44,7 @@ describe('Custom Bindings', () => {
     expect(open()).toBe(false)
   })
 
-  it('entfernt den Listener, wenn Knockout das Element entfernt', async () => {
+  it('removes the listener when Knockout removes the element', async () => {
     document.body.innerHTML = `
       <section><aside id="mini-cart" data-bind="clickOutside: close">Warenkorb</aside></section>
       <button>Weiter einkaufen</button>`

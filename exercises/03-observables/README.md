@@ -1,19 +1,21 @@
-# 03 · Wie merkt Knockout, dass sich etwas ändert?
+*English · [Deutsch](README.de.md)*
 
-Ein Observable ist eine Funktion: ohne Argument liest du den Wert, mit Argument schreibst du ihn. Wer liest, während ein Computed oder Binding rechnet, wird automatisch als Abhängigkeit registriert. Beispiel ist die Menge einer Warenkorb-Position im Werkstatt-Shop.
+# 03 · How does Knockout notice that something changed?
 
-## Aufgabe
+An Observable is a function: call it without an argument to read the value, with an argument to write it. Whoever reads while a Computed or binding is evaluating is registered as a dependency automatically. The example is the quantity of a cart line item in the workshop shop.
 
-1. Öffne `start/quantity.ts`.
-2. Implementiere `increment` und `decrement` in `createQuantity`. Die Menge fällt nie unter 1.
-3. Schreib `recordChanges`: sammle per `subscribe` jeden neuen Wert, `dispose` beendet die Subscription.
-4. Ändere `createAuditedTotal` so, dass der Steuersatz mit `peek()` gelesen wird. Eine Änderung am Steuersatz löst dann keine Neuberechnung aus. Die Summe bleibt in ganzen Cent.
-5. Überleg: Wann ist `peek` richtig, wann versteckt es einen Bug?
+## Task
 
-## Prüfen
+1. Open `start/quantity.ts`.
+2. Implement `increment` and `decrement` in `createQuantity`. The quantity never drops below 1.
+3. Write `recordChanges`: collect every new value via `subscribe`; `dispose` ends the subscription.
+4. Change `createAuditedTotal` so that the tax rate is read with `peek()`. A change to the tax rate then no longer triggers a recalculation. The total stays in whole cents.
+5. Think about it: when is `peek` the right choice, and when does it hide a bug?
+
+## Check
 
 ```bash
 npm run test:start -- exercises/03-observables
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

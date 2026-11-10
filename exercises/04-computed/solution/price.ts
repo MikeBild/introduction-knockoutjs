@@ -1,6 +1,6 @@
 import ko from 'knockout'
 
-// Schreibbares pureComputed: intern Cent, im Eingabefeld Euro mit Komma
+// Writable pureComputed: cents internally, euros with a decimal comma in the input field
 export const createPriceInput = (initialCents: number) => {
   const priceCents = ko.observable(initialCents)
   const priceText = ko.pureComputed<string>({

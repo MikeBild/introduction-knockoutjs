@@ -1,11 +1,11 @@
 import ko from 'knockout'
 import type { Product } from '../shop.ts'
 
-// Jede Position hat eine eigene Menge als Observable – das observableArray verfolgt nur die Liste
+// Every line item has its own quantity as an Observable – the observableArray only tracks the list
 export type CartItem = {
   product: Product
   quantity: ko.Observable<number>
-  // Das value-Binding schreibt Strings; quantityText übersetzt und lässt nur ganze Zahlen ab 1 durch
+  // The value binding writes strings; quantityText translates and only lets whole numbers from 1 through
   quantityText: ko.WritablePureComputed<string>
 }
 
@@ -36,7 +36,7 @@ export const createCart = () => {
     items.removeAll()
   }
 
-  // Hängt von der Liste UND von jeder Menge ab
+  // Depends on the list AND on every quantity
   const totalCents = ko.pureComputed(() =>
     items().reduce((sum, item) => sum + item.quantity() * item.product.priceCents, 0),
   )

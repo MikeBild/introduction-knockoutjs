@@ -2,15 +2,15 @@ import ko from 'knockout'
 
 export type Validator<T> = (value: T) => string | null
 
-// TODO: Typen mit ko.Observable<T> und ko.PureComputed<…> statt any
+// TODO: Types with ko.Observable<T> and ko.PureComputed<…> instead of any
 export type Field<T> = {
   value: any
   error: any
   isValid: any
 }
 
-// TODO: value als Observable mit initial, error als pureComputed aus validate(value()),
-//       isValid als pureComputed (true, wenn error null ist)
+// TODO: value as an Observable with initial, error as a pureComputed from validate(value()),
+//       isValid as a pureComputed (true when error is null)
 export const createField = <T>(initial: NoInfer<T>, validate: Validator<T>): Field<T> => {
   void validate
   const value = ko.observable(initial)

@@ -9,8 +9,8 @@ export type KnockoutElementOptions = {
   observedAttributes?: string[]
 }
 
-// Hüllt Knockout in ein Custom Element: jede Seite, die HTML ausliefert, kann es nutzen.
-// Shadow DOM verhindert, dass ein äußeres ko.applyBindings in den Inhalt hineinbindet.
+// Wraps Knockout in a Custom Element: any page that serves HTML can use it.
+// Shadow DOM prevents an outer ko.applyBindings from binding into the content.
 export const defineKnockoutElement = (tagName: string, options: KnockoutElementOptions) => {
   if (customElements.get(tagName)) return
   const observed = options.observedAttributes ?? []
@@ -51,7 +51,7 @@ export const defineKnockoutElement = (tagName: string, options: KnockoutElementO
 }
 
 
-// Beispiel aus dem Werkstatt-Shop: Mengenwahl mit Attribut start und Event quantity-change
+// Example from the workshop shop: quantity picker with attribute start and event quantity-change
 export const defineQuantityElement = () =>
   defineKnockoutElement('ko-quantity', {
     observedAttributes: ['start'],

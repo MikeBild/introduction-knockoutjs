@@ -15,8 +15,8 @@ const product = (index: number): Product => {
 const schrauben = product(0)
 const akkuschrauber = product(1)
 
-describe('Warenkorb mit observableArray', () => {
-  it('legt neue Produkte als Position mit Menge 1 an', () => {
+describe('Cart with observableArray', () => {
+  it('adds new products as a line item with quantity 1', () => {
     const cart = createCart()
     cart.add(schrauben)
     expect(cart.items().map((item) => [item.product.name, item.quantity()])).toEqual([
@@ -24,7 +24,7 @@ describe('Warenkorb mit observableArray', () => {
     ])
   })
 
-  it('erhöht die Menge, wenn das Produkt schon im Warenkorb liegt', () => {
+  it('increases the quantity when the product is already in the cart', () => {
     const cart = createCart()
     cart.add(schrauben)
     cart.add(schrauben)
@@ -32,7 +32,7 @@ describe('Warenkorb mit observableArray', () => {
     expect(cart.items()[0]?.quantity()).toBe(2)
   })
 
-  it('rechnet Summe und Anzahl in Cent neu, auch wenn sich eine Menge ändert', () => {
+  it('recalculates the total in cents and the count, also when a quantity changes', () => {
     const cart = createCart()
     cart.add(schrauben)
     cart.add(akkuschrauber)
@@ -42,7 +42,7 @@ describe('Warenkorb mit observableArray', () => {
     expect(cart.itemCount()).toBe(4)
   })
 
-  it('entfernt einzelne Positionen und leert den Warenkorb', () => {
+  it('removes single line items and clears the cart', () => {
     const cart = createCart()
     cart.add(schrauben)
     cart.add(akkuschrauber)
@@ -55,7 +55,7 @@ describe('Warenkorb mit observableArray', () => {
     expect(cart.totalCents()).toBe(0)
   })
 
-  it('übernimmt über quantityText nur ganze Mengen ab 1', () => {
+  it('accepts only whole quantities from 1 via quantityText', () => {
     const cart = createCart()
     cart.add(schrauben)
     const item = cart.items()[0]
@@ -70,7 +70,7 @@ describe('Warenkorb mit observableArray', () => {
     expect(item.quantityText()).toBe('4')
   })
 
-  it('meldet Änderungen als arrayChange', () => {
+  it('reports changes as arrayChange', () => {
     const cart = createCart()
     const changes: ko.utils.ArrayChange[] = []
     const subscription = cart.items.subscribe(

@@ -1,4 +1,4 @@
-// legacy/examples/Todos/js/app.js aus dem Material von 2015 (unverändert)
+// archive/examples/Todos/js/app.js from the 2015 material (unchanged)
 export const legacyTodosApp = `// MODEL
 var Todo = function (text) {
     this.content = ko.observable(text);

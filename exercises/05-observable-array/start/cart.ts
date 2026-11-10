@@ -7,8 +7,8 @@ export type CartItem = {
   quantityText: ko.WritablePureComputed<string>
 }
 
-// TODO: quantity startet bei 1. quantityText liest String(quantity()) und schreibt nur
-//       ganze Zahlen ab 1 zurück – das value-Binding liefert Strings wie "3"
+// TODO: quantity starts at 1. quantityText reads String(quantity()) and only writes back
+//       whole numbers from 1 – the value binding delivers strings like "3"
 export const createCartItem = (product: Product): CartItem => {
   const quantity = ko.observable(1)
   const quantityText = ko.pureComputed<string>({
@@ -23,20 +23,20 @@ export const createCartItem = (product: Product): CartItem => {
 export const createCart = () => {
   const items = ko.observableArray<CartItem>([])
 
-  // TODO: Ist das Produkt schon im Warenkorb, Menge um eins erhöhen, sonst createCartItem(product) anhängen
+  // TODO: If the product is already in the cart, increase the quantity by one, otherwise append createCartItem(product)
   const add = (product: Product) => {
     void product
   }
-  // TODO: genau diese Position entfernen (items.remove)
+  // TODO: remove exactly this line item (items.remove)
   const remove = (item: CartItem) => {
     void item
   }
-  // TODO: alle Positionen entfernen (items.removeAll)
+  // TODO: remove all line items (items.removeAll)
   const clear = () => {}
 
-  // TODO: Summe über quantity × priceCents – liest die Liste UND jede Menge
+  // TODO: Sum over quantity × priceCents – reads the list AND every quantity
   const totalCents = ko.pureComputed(() => 0)
-  // TODO: Summe aller Mengen
+  // TODO: Sum of all quantities
   const itemCount = ko.pureComputed(() => items().length)
 
   return { items, add, remove, clear, totalCents, itemCount }

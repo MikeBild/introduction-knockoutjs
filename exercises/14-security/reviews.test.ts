@@ -16,14 +16,14 @@ const render = (...reviews: Impl.Review[]) => {
   return vm
 }
 
-describe('Produktbewertungen ohne Cross-Site Scripting', () => {
-  it('zeigt Markup aus Bewertungen als Text', () => {
+describe('Product reviews without Cross-Site Scripting', () => {
+  it('shows markup from reviews as text', () => {
     render({ author: 'Mallory', body: '<img src=x onerror=alert(1)>' })
     expect(document.querySelector('img')).toBeNull()
     expect(screen.getByText('<img src=x onerror=alert(1)>')).toBeTruthy()
   })
 
-  it('macht aus https-Adressen sichere Links', () => {
+  it('turns https addresses into safe links', () => {
     render({ author: 'Ada', body: 'Passt zur Anleitung auf https://example.org/werkbank – top' })
     const link = screen.getByRole<HTMLAnchorElement>('link')
     expect(link.href).toBe('https://example.org/werkbank')
@@ -33,12 +33,12 @@ describe('Produktbewertungen ohne Cross-Site Scripting', () => {
     )
   })
 
-  it('macht aus javascript:-Adressen keinen Link', () => {
+  it('does not turn javascript: addresses into a link', () => {
     render({ author: 'Mallory', body: 'Gutschein: javascript:alert(document.cookie)' })
     expect(screen.queryByRole('link')).toBeNull()
   })
 
-  it('folgt Änderungen an den Bewertungen', () => {
+  it('follows changes to the reviews', () => {
     const vm = render({ author: 'Ada', body: 'Solides Schraubenset' })
     vm.reviews([{ author: 'Ada', body: 'Jetzt <b>fünf</b> Sterne?' }])
     expect(document.querySelector('b')).toBeNull()

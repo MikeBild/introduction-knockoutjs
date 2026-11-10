@@ -1,4 +1,4 @@
-// Werkstatt-Shop: das durchgehende Beispiel aller Übungen. Geld immer in ganzen Cent.
+// Workshop shop: the running example of all exercises. Money always in whole cents.
 export type Product = { id: string; name: string; priceCents: number; stock: number }
 
 export const products: Product[] = [
@@ -10,5 +10,5 @@ export const products: Product[] = [
 
 const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
 
-// Nur zur Anzeige wird aus Cent ein Euro-Betrag
+// Only for display do cents become a euro amount
 export const formatCents = (cents: number): string => euro.format(cents / 100)

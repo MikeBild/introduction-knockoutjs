@@ -8,9 +8,9 @@ export type Rule =
 
 export type Finding = { rule: Rule; line: number }
 
-// TODO: Lege je Regel ein Muster an (RegExp), das eine Zeile als Altlast erkennt.
-// TODO: Gib je Treffer { rule, line } zurück, line zählt ab 1.
-// TODO: Melde global-ko nicht, wenn die Datei Knockout per ESM importiert.
+// TODO: Create one pattern (RegExp) per rule that recognizes a line as outdated.
+// TODO: Return { rule, line } for each match; line counts from 1.
+// TODO: Do not report global-ko when the file imports Knockout via ESM.
 export const auditLegacy = (source: string): Finding[] => {
   void source
   return []

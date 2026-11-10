@@ -8,7 +8,7 @@ export type Field<T> = {
   isValid: ko.PureComputed<boolean>
 }
 
-// Der Validator bestimmt T, NoInfer verhindert Literal-Types wie 17 aus dem Startwert
+// The validator determines T, NoInfer prevents literal types like 17 from the initial value
 export const createField = <T>(initial: NoInfer<T>, validate: Validator<T>): Field<T> => {
   const value = ko.observable(initial) as ko.Observable<T>
   const error = ko.pureComputed(() => validate(value()))

@@ -10,7 +10,7 @@ const { defineQuantityElement } = impl
 
 beforeAll(() => defineQuantityElement())
 
-// Testing Library sucht nicht im Shadow DOM – wir geben den Container ausdrücklich an
+// Testing Library does not search inside the Shadow DOM – we pass the container explicitly
 const inside = (host: Element) => {
   const container = host.shadowRoot?.firstElementChild
   if (!(container instanceof HTMLElement)) throw new Error('kein gebundener Inhalt im Shadow Root')
@@ -18,15 +18,15 @@ const inside = (host: Element) => {
 }
 const shown = (host: Element) => inside(host).getByRole('status').textContent
 
-describe('Knockout als Custom Element', () => {
-  it('rendert mit dem Startwert aus dem Attribut', () => {
+describe('Knockout as a Custom Element', () => {
+  it('renders with the initial value from the attribute', () => {
     const quantity = document.createElement('ko-quantity')
     quantity.setAttribute('start', '5')
     document.body.append(quantity)
     expect(shown(quantity)).toBe('5')
   })
 
-  it('meldet Klicks als quantity-change-Event nach außen und bleibt bei mindestens 1', async () => {
+  it('reports clicks to the outside as a quantity-change event and stays at 1 or more', async () => {
     const quantity = document.createElement('ko-quantity')
     const onChange = vi.fn()
     quantity.addEventListener('quantity-change', (event) => onChange((event as CustomEvent).detail))
@@ -39,14 +39,14 @@ describe('Knockout als Custom Element', () => {
     expect(shown(quantity)).toBe('1')
   })
 
-  it('folgt Attributänderungen', () => {
+  it('follows attribute changes', () => {
     const quantity = document.createElement('ko-quantity')
     document.body.append(quantity)
     quantity.setAttribute('start', '10')
     expect(shown(quantity)).toBe('10')
   })
 
-  it('lässt sich aus einer Knockout-Seite mit attr- und event-Binding nutzen', async () => {
+  it('can be used from a Knockout page with attr and event bindings', async () => {
     document.body.innerHTML = `
       <ko-quantity data-bind="attr: { start: initial }, event: { 'quantity-change': onChange }"></ko-quantity>
       <p data-bind="text: 'Im Warenkorb: ' + chosen()"></p>`
@@ -65,7 +65,7 @@ describe('Knockout als Custom Element', () => {
     expect(document.querySelector('p')?.textContent).toBe('Im Warenkorb: 8')
   })
 
-  it('räumt Bindings auf, wenn das Element entfernt wird', () => {
+  it('cleans up bindings when the element is removed', () => {
     const quantity = document.createElement('ko-quantity')
     document.body.append(quantity)
     const container = quantity.shadowRoot?.firstElementChild

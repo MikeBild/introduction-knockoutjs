@@ -1,10 +1,10 @@
 import ko from 'knockout'
 
-// Produktbewertung im Werkstatt-Shop – body ist Nutzereingabe
+// Product review in the workshop shop – body is user input
 export type Review = { author: string; body: string }
 
-// TODO: Die Lücke schließen – html: review.body rendert Nutzereingaben als Markup (Cross-Site Scripting).
-//       Nimm stattdessen das linkify-Binding.
+// TODO: Close the gap – html: review.body renders user input as markup (Cross-Site Scripting).
+//       Use the linkify binding instead.
 export const reviewsTemplate = `
   <ul data-bind="foreach: { data: reviews, as: 'review' }">
     <li>
@@ -14,8 +14,8 @@ export const reviewsTemplate = `
   </ul>
 `
 
-// TODO: Text in Textknoten und Links zerlegen. Links nur für http: und https:,
-//       mit rel="noopener noreferrer". Kein innerHTML, kein insertAdjacentHTML.
+// TODO: Split the text into text nodes and links. Links only for http: and https:,
+//       with rel="noopener noreferrer". No innerHTML, no insertAdjacentHTML.
 const linkify: ko.BindingHandler<ko.MaybeSubscribable<string>> = {
   update: (element: HTMLElement, valueAccessor) => {
     element.textContent = ko.unwrap(valueAccessor())

@@ -3,7 +3,7 @@ import type { ShopViewModel } from '../shop-view.ts'
 
 export { createShopViewModel } from '../shop-view.ts'
 
-// Nur eingebaute Bindings, kein eigener DOM-Code
+// Only built-in bindings, no DOM code of your own
 export const shopTemplate = `
   <h2>Produkte</h2>
   <ul data-bind="foreach: { data: products, as: 'product' }">

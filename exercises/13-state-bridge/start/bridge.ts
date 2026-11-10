@@ -1,6 +1,6 @@
 import ko from 'knockout'
 
-// Framework-neutraler Vertrag: jede Welt – Knockout, Web Component, später etwas Neues – spricht nur diesen
+// Framework-neutral contract: every world – Knockout, Web Component, later something new – speaks only this
 export type Store<T> = {
   get(): T
   subscribe(listener: (value: T) => void): () => void
@@ -8,9 +8,9 @@ export type Store<T> = {
 
 export type WritableStore<T> = Store<T> & { set(value: T): void }
 
-// TODO: aktuellen Wert halten, Listener in einem Set sammeln.
-//       set ignoriert gleiche Werte (Object.is) und ruft sonst alle Listener auf.
-//       subscribe gibt eine Funktion zurück, die den Listener wieder entfernt.
+// TODO: Hold the current value, collect listeners in a Set.
+//       set ignores equal values (Object.is) and otherwise calls all listeners.
+//       subscribe returns a function that removes the listener again.
 export const createStore = <T>(initial: T): WritableStore<T> => {
   let current = initial
   return {
@@ -22,21 +22,21 @@ export const createStore = <T>(initial: T): WritableStore<T> => {
   }
 }
 
-// TODO: get liest den Wert ohne Abhängigkeit (peek), subscribe meldet nur Änderungen –
-//       den Listener NICHT sofort aufrufen. Die Rückgabe beendet die Knockout-Subscription.
+// TODO: get reads the value without a dependency (peek), subscribe reports changes only –
+//       do NOT call the listener immediately. The return value ends the Knockout subscription.
 export const toStore = <T>(source: ko.Subscribable<T>): Store<T> => ({
   get: () => ko.unwrap(source),
   subscribe: () => () => {},
 })
 
-// TODO: Startwert über store.get, danach jede Änderung per store.subscribe übernehmen.
-//       dispose meldet sich vom Store ab.
+// TODO: Initial value via store.get, then take over every change via store.subscribe.
+//       dispose unsubscribes from the store.
 export const fromStore = <T>(store: Store<T>) => {
   const target = ko.observable(store.get()) as ko.Observable<T>
   return { value: ko.pureComputed(() => target()), dispose: () => {} }
 }
 
-// Beispiel: ein Warenkorb, den eine Knockout-Seite und eine Web Component gemeinsam nutzen
+// Example: a cart that a Knockout page and a Web Component share
 export const createSharedCart = () => {
   const store = createStore<readonly string[]>([])
   return { ...store, add: (item: string) => store.set([...store.get(), item]) }
@@ -44,8 +44,8 @@ export const createSharedCart = () => {
 
 export type SharedCart = ReturnType<typeof createSharedCart>
 
-// Neue Welt ohne Knockout: eine native Web Component, die nur den Store-Vertrag kennt.
-// Objekte wie den Store übergibst du als Property, nicht als Attribut.
+// New world without Knockout: a native Web Component that only knows the store contract.
+// You pass objects like the store as a property, not as an attribute.
 export class CartBadge extends HTMLElement {
   #store: Store<readonly string[]> | null = null
   #unsubscribe: (() => void) | null = null

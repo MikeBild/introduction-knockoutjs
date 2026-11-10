@@ -7,12 +7,12 @@ const target = import.meta.env.TARGET
 const impl: typeof Impl = await import(`./${target}/search.ts`)
 const { createLiveSearch, enableDeferredUpdates } = impl
 
-// Steht für einen Request an die Produkt-API
+// Stands in for a request to the product API
 const loadProducts = (query: string): Product[] =>
   products.filter((product) => product.name.toLowerCase().includes(query))
 
 describe('rateLimit', () => {
-  it('lädt erst, wenn die Eingabe 300 ms ruht', () => {
+  it('loads only once the input has been idle for 300 ms', () => {
     vi.useFakeTimers()
     const load = vi.fn(loadProducts)
     const search = createLiveSearch(load)
@@ -37,7 +37,7 @@ describe('rateLimit', () => {
 })
 
 describe('deferUpdates', () => {
-  it('rechnet die Warenkorbsumme nach mehreren Änderungen nur einmal neu', () => {
+  it('recalculates the cart total only once after several changes', () => {
     enableDeferredUpdates()
     const priceCents = ko.observable(1290)
     const quantity = ko.observable(1)

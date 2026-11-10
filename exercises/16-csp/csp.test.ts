@@ -6,7 +6,7 @@ const target = import.meta.env.TARGET
 const impl: typeof Impl = await import(`./${target}/csp.ts`)
 const { buildCsp, createHtmlPolicy } = impl
 
-// Kleiner Allowlist-Sanitizer für den Test: nur b, i, em, strong, p – ohne Attribute
+// Small allowlist sanitizer for the test: only b, i, em, strong, p – without attributes
 const allowed = new Set(['b', 'i', 'em', 'strong', 'p'])
 const sanitizeBasic = (html: string) => {
   const template = document.createElement('template')
@@ -19,13 +19,13 @@ const sanitizeBasic = (html: string) => {
 }
 
 describe('buildCsp', () => {
-  it('erlaubt Knockout 3.5 nur mit unsafe-eval', () => {
+  it('allows Knockout 3.5 only with unsafe-eval', () => {
     expect(buildCsp({ allowEval: true })).toBe(
       "default-src 'self'; script-src 'self' 'unsafe-eval'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
     )
   })
 
-  it('verbietet eval ohne allowEval und ergänzt Trusted Types und Reporting', () => {
+  it('forbids eval without allowEval and adds Trusted Types and reporting', () => {
     expect(buildCsp({ allowEval: false, trustedTypes: true, reportTo: 'csp' })).toBe(
       "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; " +
         "require-trusted-types-for 'script'; report-to csp",
@@ -38,7 +38,7 @@ describe('createHtmlPolicy', () => {
     delete (globalThis as { trustedTypes?: unknown }).trustedTypes
   })
 
-  it('zeigt im html-Binding nur bereinigtes HTML', () => {
+  it('shows only sanitized HTML in the html binding', () => {
     const policy = createHtmlPolicy(sanitizeBasic)
     document.body.innerHTML = '<div data-bind="html: review"></div>'
     const review = ko.observable(policy.createHTML('<b>Sehr stabil</b> – die Werkbank<img src=x onerror="alert(1)">'))
@@ -48,7 +48,7 @@ describe('createHtmlPolicy', () => {
     expect(div?.querySelector('img')).toBeNull()
   })
 
-  it('nutzt die Trusted-Types-API des Browsers, wenn es sie gibt', () => {
+  it('uses the Trusted Types API of the browser when it exists', () => {
     const createPolicy = vi.fn((_name: string, rules: { createHTML: (html: string) => string }) => rules)
     ;(globalThis as { trustedTypes?: unknown }).trustedTypes = { createPolicy }
     const policy = createHtmlPolicy(sanitizeBasic)

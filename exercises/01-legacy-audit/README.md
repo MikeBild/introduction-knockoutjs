@@ -1,19 +1,21 @@
-# 01 · Altlasten im Knockout-Code finden
+*English · [Deutsch](README.de.md)*
 
-Bevor du modernisierst, brauchst du eine Bestandsaufnahme. In dieser Übung schreibst du einen kleinen Audit, der typische Muster aus Knockout-Code von 2010 bis 2015 findet – zum Beispiel aus der alten Todo-App in `legacy/examples/Todos/js/app.js`.
+# 01 · Find outdated patterns in Knockout code
 
-## Aufgabe
+Before you modernize, you need an inventory of the code. In this exercise you write a small audit that finds typical patterns from Knockout code written between 2010 and 2015 – for example in the old Todo app in `archive/examples/Todos/js/app.js`.
 
-1. Öffne `start/audit.ts` und lies die Regeln im Type `Rule`.
-2. Lege für jede Regel ein Muster an: `ko.dependentObservable(`, `data-bind` mit `html:`, `data-bind` mit `function (`, globales `ko.applyBindings(`, jQuery-Templates (`text/x-jquery-tmpl`, `.tmpl(`) und das Mapping-Plugin (`ko.mapping`).
-3. Gib je Treffer `{ rule, line }` zurück, die Zeilen zählen ab 1.
-4. Melde `global-ko` nicht, wenn die Datei Knockout per `import ko from 'knockout'` lädt.
-5. Lass den Audit über `fixtures.ts` laufen und notiere, was du zuerst ersetzen würdest.
+## Task
 
-## Prüfen
+1. Open `start/audit.ts` and read the rules in the type `Rule`.
+2. Create a pattern for each rule: `ko.dependentObservable(`, `data-bind` with `html:`, `data-bind` with `function (`, global `ko.applyBindings(`, jQuery templates (`text/x-jquery-tmpl`, `.tmpl(`) and the mapping plugin (`ko.mapping`).
+3. Return `{ rule, line }` for each match; lines count from 1.
+4. Do not report `global-ko` when the file loads Knockout via `import ko from 'knockout'`.
+5. Run the audit over `fixtures.ts` and note what you would replace first.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/01-legacy-audit
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

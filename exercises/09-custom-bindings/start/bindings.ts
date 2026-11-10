@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import { formatCents } from '../../shop.ts'
 
-// TODO: update-Funktion: Wert (ganze Cent) mit ko.unwrap lesen und mit formatCents anzeigen
+// TODO: update function: read the value (whole cents) with ko.unwrap and display it with formatCents
 const currency: ko.BindingHandler<ko.MaybeSubscribable<number>> = {
   update: (element: HTMLElement, valueAccessor) => {
     void formatCents
@@ -9,8 +9,8 @@ const currency: ko.BindingHandler<ko.MaybeSubscribable<number>> = {
   },
 }
 
-// TODO: init-Funktion: Klick-Listener am document, ruft den Handler nur bei Klicks außerhalb von element
-// TODO: Listener mit ko.utils.domNodeDisposal.addDisposeCallback wieder entfernen
+// TODO: init function: click listener on document, calls the handler only on clicks outside element
+// TODO: Remove the listener again with ko.utils.domNodeDisposal.addDisposeCallback
 const clickOutside: ko.BindingHandler<(event: MouseEvent) => void> = {
   init: (element: HTMLElement, valueAccessor) => {
     void element

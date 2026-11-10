@@ -1,21 +1,23 @@
-# 07 · Komponenten statt verschachtelter Templates
+*English · [Deutsch](README.de.md)*
 
-Eine Knockout-Komponente bündelt Template und ViewModel unter einem Tag-Namen. Daten kommen über `params`, Aufräumarbeit gehört in `dispose`. Beispiel ist eine Warenkorb-Zeile im Werkstatt-Shop (`cart.ts` ist der Warenkorb aus Übung 05).
+# 07 · Components instead of nested templates
 
-## Aufgabe
+A Knockout component bundles a template and a ViewModel under one tag name. Data arrives via `params`, cleanup belongs in `dispose`. The example is a cart line in the workshop shop (`cart.ts` is the cart from exercise 05).
 
-1. Öffne `start/cart-line.ts`.
-2. Berechne `lineTotalCents` als `pureComputed`: Menge mal `priceCents`.
-3. Abonniere im Konstruktor `item.quantity` und setze bei jeder Änderung `changedAt`. Merk dir die Subscription und beende sie in `dispose`.
-4. Implementiere `remove` (ruft `onRemove` mit der eigenen Position auf) und schreib das Template: Name, Mengenfeld, Positionssumme, Hinweis „geändert“ und Button „Entfernen“.
-5. Registriere die Komponente in `registerCartLine` genau einmal als `cart-line`, mit der Klasse als `viewModel`.
+## Task
 
-Wichtig: Knockout ruft `viewModel` mit `new` auf. Eine Arrow Function scheitert deshalb – nimm eine Klasse oder `{ createViewModel }`. Komponenten laden asynchron, in Tests wartest du mit `findBy…`.
+1. Open `start/cart-line.ts`.
+2. Compute `lineTotalCents` as a `pureComputed`: quantity times `priceCents`.
+3. In the constructor, subscribe to `item.quantity` and set `changedAt` on every change. Remember the subscription and end it in `dispose`.
+4. Implement `remove` (calls `onRemove` with its own line item) and write the template: name, quantity field, line total, the hint “geändert” and the button “Entfernen”.
+5. Register the component in `registerCartLine` exactly once as `cart-line`, with the class as `viewModel`.
 
-## Prüfen
+Important: Knockout calls `viewModel` with `new`. An Arrow Function therefore fails – use a class or `{ createViewModel }`. Components load asynchronously; in tests you wait with `findBy…`.
+
+## Check
 
 ```bash
 npm run test:start -- exercises/07-components
 ```
 
-`npm run test:start` testet deinen Startpunkt in `start/`, `npm test` die Lösung in `solution/`.
+`npm run test:start` tests your starting point in `start/`, `npm test` tests the reference solution in `solution/`.

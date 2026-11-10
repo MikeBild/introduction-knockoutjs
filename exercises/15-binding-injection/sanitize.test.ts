@@ -13,11 +13,11 @@ afterEach(() => {
   delete flags.pwned
 })
 
-// Eine Produktbewertung, wie sie ein Angreifer speichert: harmloses HTML, aber mit Knockout-Binding
+// A product review as an attacker stores it: harmless HTML, but with a Knockout binding
 const maliciousReview =
   '<p>Top Akkuschrauber!</p><span data-bind="text: (function(){ window.pwned = true })()"></span>'
 
-// Server rendert die Bewertung in die Produktseite, danach bindet Knockout den ganzen Bereich
+// The server renders the review into the product page, then Knockout binds the whole area
 const renderAndBind = (reviewHtml: string) => {
   const container = document.createElement('section')
   container.innerHTML = `<h2 data-bind="text: title"></h2><div class="review">${reviewHtml}</div>`
@@ -27,25 +27,25 @@ const renderAndBind = (reviewHtml: string) => {
 }
 
 describe('Binding Injection', () => {
-  it('Gegenprobe: ohne Bereinigung führt Knockout das eingeschleuste Binding aus', () => {
+  it('counter-check: without sanitizing, Knockout runs the injected binding', () => {
     renderAndBind(maliciousReview)
     expect(flags.pwned).toBe(true)
   })
 
-  it('führt nach stripBindings kein eingeschleustes Binding aus', () => {
+  it('runs no injected binding after stripBindings', () => {
     const container = renderAndBind(stripBindings(maliciousReview))
     expect(flags.pwned).toBeUndefined()
     expect(container.querySelector('h2')?.textContent).toBe('Bewertungen')
     expect(container.querySelector('.review p')?.textContent).toBe('Top Akkuschrauber!')
   })
 
-  it('entfernt virtuelle Bindings in HTML-Kommentaren', () => {
+  it('removes virtual bindings in HTML comments', () => {
     const html = 'Fünf Sterne <!-- ko text: (function(){ window.pwned = true })() --><!-- /ko -->'
     renderAndBind(stripBindings(html))
     expect(flags.pwned).toBeUndefined()
   })
 
-  it('entfernt params, Event-Handler-Attribute und Skripte, behält harmloses HTML', () => {
+  it('removes params, event handler attributes and scripts, keeps harmless HTML', () => {
     const html =
       '<star-rating params="x: (function(){ return 1 })()"></star-rating>' +
       '<img src="werkbank.png" alt="Foto" onerror="alert(1)"><script>alert(1)</script><b>stabil</b>'
