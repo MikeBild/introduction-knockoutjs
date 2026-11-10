@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Knockout 3.5 modernisiert: MVVM, TypeScript, ESM, Vite, Tests und schrittweise Migration",
+  "description": "Knockout 3.5 modernized: MVVM, TypeScript, ESM, Vite, tests, and step-by-step migration",
   "license": "MIT",
   "engines": {
     "node": ">=26"
