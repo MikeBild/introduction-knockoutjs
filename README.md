@@ -72,9 +72,10 @@ The shop sells workshop supplies: customer data, products, cart, order and revie
 
 ## Workshop and slides
 
-- Workshop: [“Modernize KnockoutJS and migrate step by step”](https://workshops.mikebild.dev/w/knockout/remote/)
-- Slides: [slides.mikebild.dev/introduction-knockoutjs](https://slides.mikebild.dev/introduction-knockoutjs.html)
-- PDF: [slides.mikebild.dev/introduction-knockoutjs.pdf](https://slides.mikebild.dev/introduction-knockoutjs.pdf)
+- Workshop (held in German): [“Modernize KnockoutJS and migrate step by step”](https://workshops.mikebild.dev/w/knockout/remote/)
+- Slides: [slides.mikebild.dev/introduction-knockoutjs.en](https://slides.mikebild.dev/introduction-knockoutjs.en.html)
+- PDF: [introduction-knockoutjs.en.pdf](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-knockoutjs/introduction-knockoutjs.en.pdf)
+- Video: [introduction-knockoutjs.en.mp4](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-knockoutjs/introduction-knockoutjs.en.mp4)
 
 ## Archive
 
