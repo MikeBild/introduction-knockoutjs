@@ -74,8 +74,8 @@ Der Shop verkauft Werkstattbedarf: Kundendaten, Produkte, Warenkorb, Bestellung 
 
 - Workshop: [„KnockoutJS modernisieren und schrittweise migrieren“](https://workshops.mikebild.dev/w/knockout/remote/)
 - Folien: [slides.mikebild.dev/introduction-knockoutjs](https://slides.mikebild.dev/introduction-knockoutjs.html)
-- PDF: [introduction-knockoutjs.pdf](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-knockoutjs/introduction-knockoutjs.pdf)
-- Video: [introduction-knockoutjs.mp4](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-knockoutjs/introduction-knockoutjs.mp4)
+- PDF: [introduction-knockoutjs.pdf](https://media.mikebild.dev/site/mikebild/decks/introduction-knockoutjs/introduction-knockoutjs.pdf)
+- Video: [introduction-knockoutjs.mp4](https://media.mikebild.dev/site/mikebild/decks/introduction-knockoutjs/introduction-knockoutjs.mp4)
 
 ## Archiv
 
